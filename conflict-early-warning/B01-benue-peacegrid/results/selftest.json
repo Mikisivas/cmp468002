@@ -1,0 +1,126 @@
+{
+ "setup": {
+  "hex_cells": 435,
+  "history_incidents": 288,
+  "devices": [
+   "COLLAR-01",
+   "COLLAR-02",
+   "COLLAR-03",
+   "COLLAR-04",
+   "COLLAR-05"
+  ]
+ },
+ "ahp": {
+  "factors": [
+   "recent_incidents",
+   "herd_presence",
+   "stock_route_proximity",
+   "farmland_exposure",
+   "water_point_proximity"
+  ],
+  "weights": [
+   0.4185,
+   0.2625,
+   0.1599,
+   0.0973,
+   0.0618
+  ],
+  "lambda_max": 5.068,
+  "ci": 0.017,
+  "cr": 0.0152,
+  "consistent": true
+ },
+ "backtest": {
+  "cells": 435,
+  "top_cells": 87,
+  "future_incidents": 15,
+  "captured": 12,
+  "hit_rate": 0.8,
+  "chance_rate": 0.2,
+  "lift": 4.0
+ },
+ "scoring_seconds": 0.043,
+ "kwande_escalation": {
+  "before": 8.2,
+  "after": 71.8
+ },
+ "tests": [
+  {
+   "test": "AHP weights sum to 1 and matrix is consistent (CR < 0.10)",
+   "passed": true,
+   "detail": "weights [0.4185, 0.2625, 0.1599, 0.0973, 0.0618], CR 0.0152"
+  },
+  {
+   "test": "Hexagon grid covers every LGA",
+   "passed": true,
+   "detail": "435 cells"
+  },
+  {
+   "test": "Back-test: top 20% cells capture more future incidents than chance",
+   "passed": true,
+   "detail": "hit rate 0.8 vs chance 0.2 (lift 4.0)"
+  },
+  {
+   "test": "A burst of attacks and herds raises Kwande's top cell",
+   "passed": true,
+   "detail": "8.2 -> 71.8"
+  },
+  {
+   "test": "Alert dispatched to Kwande contacts",
+   "passed": true,
+   "detail": "BenuePeaceGrid SEVERE risk in Kwande: 1 grid cell(s) at or above 70. Main driver: recent incidents. Deploy patrol and call peace committee."
+  },
+  {
+   "test": "Cooldown prevents duplicate alerts",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Signed herd ping accepted",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Ping with altered body rejected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Old (replayed) ping rejected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Community report stored with phone encrypted, not in plain text",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Report flooding from one address is rate-limited",
+   "passed": true,
+   "detail": "[200, 200, 200, 200, 429, 429]"
+  },
+  {
+   "test": "Unknown LGA in a report is rejected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Responder cannot verify reports",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Map data needs sign-in",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Staff map loads",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 15,
+ "total": 15
+}
