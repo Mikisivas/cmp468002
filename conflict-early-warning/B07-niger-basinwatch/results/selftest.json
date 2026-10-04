@@ -1,0 +1,153 @@
+{
+ "setup": {
+  "dataset_rows": 2028,
+  "sha256": "43b3a1fd00223e0c",
+  "incidents": 231,
+  "calendar_cells": 96
+ },
+ "setup_seconds": 0.5,
+ "validation": {
+  "lga_months": 432,
+  "spearman_rho": 0.321
+ },
+ "mean_tpi_by_month": {
+  "1": 0.027,
+  "2": 0.026,
+  "3": 0.053,
+  "4": 0.141,
+  "5": 0.313,
+  "6": 0.381,
+  "7": 0.278,
+  "8": 0.172,
+  "9": 0.507,
+  "10": 0.459,
+  "11": 0.274,
+  "12": 0.09
+ },
+ "drought_update": {
+  "import": {
+   "accepted": true,
+   "version": 2,
+   "rows": 13
+  },
+  "peak_tpi_change": {
+   "Agwara": [
+    0.53,
+    0.74
+   ],
+   "Borgu": [
+    0.62,
+    0.88
+   ],
+   "Bosso": [
+    0.39,
+    0.56
+   ],
+   "Kontagora": [
+    0.53,
+    0.74
+   ],
+   "Lavun": [
+    0.38,
+    0.54
+   ],
+   "Mariga": [
+    0.49,
+    0.7
+   ],
+   "Mashegu": [
+    0.44,
+    0.64
+   ],
+   "Mokwa": [
+    0.61,
+    0.85
+   ],
+   "Paikoro": [
+    0.39,
+    0.54
+   ],
+   "Rafi": [
+    0.36,
+    0.53
+   ],
+   "Shiroro": [
+    0.49,
+    0.7
+   ],
+   "Wushishi": [
+    0.38,
+    0.56
+   ]
+  }
+ },
+ "tests": [
+  {
+   "test": "Three years of weekly NDVI and rainfall imported and fingerprinted",
+   "passed": true,
+   "detail": "{'dataset_rows': 2028, 'sha256': '43b3a1fd00223e0c', 'incidents': 231, 'calendar_cells': 96}"
+  },
+  {
+   "test": "Spearman of identical rankings is 1",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Simulation study: monthly TPI tracks incident counts (Spearman rho > 0.3)",
+   "passed": true,
+   "detail": "{'lga_months': 432, 'spearman_rho': 0.321}"
+  },
+  {
+   "test": "Pressure is low in the heart of the dry season (Jan-Feb, few crops in field)",
+   "passed": true,
+   "detail": "{1: 0.027, 2: 0.026, 3: 0.053, 4: 0.141, 5: 0.313, 6: 0.381, 7: 0.278, 8: 0.172, 9: 0.507, 10: 0.459, 11: 0.274, 12: 0.09}"
+  },
+  {
+   "test": "8-week calendar produced for every LGA",
+   "passed": true,
+   "detail": "96"
+  },
+  {
+   "test": "A northern drought week raises projected pressure in most LGAs",
+   "passed": true,
+   "detail": "12/12 LGAs higher"
+  },
+  {
+   "test": "Invalid dataset rejected with reasons (NDVI range, unknown area, bad date)",
+   "passed": true,
+   "detail": "['row 2: NDVI must be between -0.2 and 1', \"row 3: unknown area 'Atlantis'\", \"row 4: time data '05/01/2026' does not match format '%Y-%m-%d'\"]"
+  },
+  {
+   "test": "All stored dataset files match their sealed fingerprints",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Edited dataset file detected before it can mislead the forecast",
+   "passed": true,
+   "detail": "['version 1: file changed after import']"
+  },
+  {
+   "test": "Forged fingerprint record detected (HMAC seal)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Calendar page shows the integrity warning when data is tampered",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Planner cannot upload datasets",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "LGA chart page renders",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 13,
+ "total": 13
+}

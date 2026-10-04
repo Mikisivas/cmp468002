@@ -1,0 +1,19 @@
+{
+  "project": "NigerBasinWatch",
+  "state": "Niger",
+  "lgas": [
+    ["Mokwa", 9.295, 5.055, 0.70], ["Mariga", 10.680, 5.570, 0.75], ["Rafi", 10.190, 6.250, 0.70], ["Shiroro", 9.870, 6.720, 0.75],
+    ["Lavun", 9.200, 5.600, 0.55], ["Borgu", 9.880, 4.520, 0.60], ["Agwara", 10.710, 4.580, 0.55], ["Paikoro", 9.450, 6.750, 0.45],
+    ["Bosso", 9.700, 6.500, 0.40], ["Mashegu", 9.970, 5.780, 0.65], ["Wushishi", 9.720, 6.080, 0.50], ["Kontagora", 10.400, 5.470, 0.55]
+  ],
+  "routes": {"Kebbi-Agwara-Borgu route (illustrative)": [[11.20, 4.40], [10.70, 4.60], [10.20, 4.55], [9.85, 4.55]],
+             "Sokoto-Mariga-Kontagora-Mokwa route (illustrative)": [[11.30, 5.40], [10.70, 5.55], [10.40, 5.47], [9.95, 5.70], [9.30, 5.10]]},
+  "water": [["Kainji Lake", 10.10, 4.60], ["Jebba Lake", 9.20, 4.85], ["Shiroro Lake", 9.97, 6.84]],
+  "north_source": "Sahel source zone (Sokoto, Kebbi, Zamfara)",
+  "crop_share_in_field": {"1": 0.05, "2": 0.05, "3": 0.10, "4": 0.25, "5": 0.55, "6": 0.80, "7": 0.95, "8": 1.0, "9": 1.0, "10": 0.85, "11": 0.45, "12": 0.15},
+  "forecast_weeks": 8,
+  "anomaly_persistence": 0.85,
+  "alert_tpi": 0.55,
+  "data_key_env": "BASINWATCH_DATA_KEY",
+  "port": 5207
+}
