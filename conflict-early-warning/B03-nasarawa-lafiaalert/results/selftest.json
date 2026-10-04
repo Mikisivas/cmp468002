@@ -1,0 +1,234 @@
+{
+ "model": {
+  "accuracy": 1.0,
+  "per_class": {
+   "armed_attack": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "blocked_route": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "cattle_rustling": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "crop_destruction": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "noise": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "threat": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   }
+  },
+  "test_size": 180
+ },
+ "language_probes": {
+  "an kai hari a giza yanzu da bindigogi": "armed_attack",
+  "cow don chop my maize for shabu": "crop_destruction",
+  "barayi sun sace shanu 20 a azara": "cattle_rustling",
+  "please send me recharge card": "noise",
+  "an toshe hanyar shanu a doma": "blocked_route"
+ },
+ "pipeline_ms_per_message": 6.11,
+ "demo_feed": [
+  {
+   "id": 1,
+   "label": "crop_destruction",
+   "confidence": 1.0,
+   "lga": "Lafia",
+   "urgent": false,
+   "status": "new",
+   "event": 1
+  },
+  {
+   "id": 2,
+   "label": "noise",
+   "confidence": 1.0,
+   "lga": null,
+   "urgent": false,
+   "status": "noise",
+   "event": null
+  },
+  {
+   "id": 3,
+   "label": "armed_attack",
+   "confidence": 1.0,
+   "lga": "Keana",
+   "urgent": true,
+   "status": "new",
+   "event": 2
+  },
+  {
+   "id": 4,
+   "label": "armed_attack",
+   "confidence": 1.0,
+   "lga": "Keana",
+   "urgent": true,
+   "status": "new",
+   "event": 2
+  },
+  {
+   "id": 5,
+   "label": "armed_attack",
+   "confidence": 1.0,
+   "lga": "Keana",
+   "urgent": true,
+   "status": "new",
+   "event": 3
+  },
+  {
+   "id": 6,
+   "label": "armed_attack",
+   "confidence": 1.0,
+   "lga": "Keana",
+   "urgent": true,
+   "status": "new",
+   "event": 2
+  },
+  {
+   "id": 7,
+   "label": "armed_attack",
+   "confidence": 1.0,
+   "lga": "Keana",
+   "urgent": true,
+   "status": "new",
+   "event": 4
+  },
+  {
+   "id": 8,
+   "label": "cattle_rustling",
+   "confidence": 1.0,
+   "lga": "Awe",
+   "urgent": false,
+   "status": "new",
+   "event": 5
+  },
+  {
+   "id": 9,
+   "label": "blocked_route",
+   "confidence": 1.0,
+   "lga": "Doma",
+   "urgent": false,
+   "status": "new",
+   "event": 6
+  },
+  {
+   "id": 10,
+   "label": "threat",
+   "confidence": 1.0,
+   "lga": "Toto",
+   "urgent": true,
+   "status": "new",
+   "event": 7
+  }
+ ],
+ "alerts": [
+  "UNCONFIRMED: armed attack reported at giza, Keana (event 2). Police DPO and peace committee notified.",
+  "CORROBORATED by a second person: armed attack reported at giza, Keana (event 2). Police DPO and peace committee notified.",
+  "UNCONFIRMED: armed attack reported at kadarko, Keana (event 3). Police DPO and peace committee notified.",
+  "SPIKE in Keana: 2 incident events today against a normal 0.08 per day (Poisson p = 0.0033). Escalate to State Security Council.",
+  "CORROBORATED by a second person: armed attack reported at giza, Keana (event 2). Police DPO and peace committee notified.",
+  "UNCONFIRMED: armed attack reported at amudu, Keana (event 4). Police DPO and peace committee notified."
+ ],
+ "setup": {
+  "model_accuracy": 1.0,
+  "history_incidents": 46
+ },
+ "tests": [
+  {
+   "test": "Naive Bayes accuracy on held-out messages is at least 0.90",
+   "passed": true,
+   "detail": "1.0"
+  },
+  {
+   "test": "Correct class for Hausa, Pidgin and English probes",
+   "passed": true,
+   "detail": "{'an kai hari a giza yanzu da bindigogi': 'armed_attack', 'cow don chop my maize for shabu': 'crop_destruction', 'barayi sun sace shanu 20 a azara': 'cattle_rustling', 'please send me recharge card': 'noise', 'an toshe hanyar shanu a doma': 'blocked_route'}"
+  },
+  {
+   "test": "Gazetteer finds the LGA from a village name",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Urgency detector (Hausa 'yanzu' and 'bindigogi')",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Poisson tail P(X>=3 | 0.1) is tiny and P(X>=0) = 1",
+   "passed": true,
+   "detail": "0.00015465307026474306"
+  },
+  {
+   "test": "Signed gateway webhook accepted",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Forged webhook (wrong signature) refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Replayed webhook (old timestamp) refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Irrelevant SMS marked noise and not turned into an event",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Two senders about Giza merge into one corroborated event",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Same sender repeating does not count as corroboration",
+   "passed": true,
+   "detail": "senders 2, reports 3"
+  },
+  {
+   "test": "Urgent alert sent first as UNCONFIRMED, then CORROBORATED",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Spike test flags Keana (several attack events in one day)",
+   "passed": true,
+   "detail": "['SPIKE in Keana: 2 incident events today against a normal 0.08 per day (Poisson p = 0.0033). Escalate to State Security Council.']"
+  },
+  {
+   "test": "Phone numbers never stored in plain text",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Viewer cannot inject test SMS",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Webhook without signature refused over HTTP",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 16,
+ "total": 16
+}

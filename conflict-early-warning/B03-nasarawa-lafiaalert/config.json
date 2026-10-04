@@ -1,0 +1,22 @@
+{
+  "project": "LafiaAlert",
+  "state": "Nasarawa",
+  "lgas": [
+    ["Lafia", 8.494, 8.515, 0.55], ["Keana", 8.150, 8.800, 0.70], ["Doma", 8.383, 8.350, 0.65], ["Awe", 8.100, 9.130, 0.60],
+    ["Obi", 8.370, 8.770, 0.75], ["Nasarawa", 8.540, 7.710, 0.45], ["Toto", 8.400, 7.200, 0.55], ["Kokona", 8.800, 8.120, 0.40],
+    ["Akwanga", 8.910, 8.400, 0.35], ["Wamba", 8.940, 8.600, 0.30], ["Nasarawa Eggon", 8.720, 8.530, 0.40]
+  ],
+  "gazetteer": {
+    "Lafia": ["lafia", "shabu", "assakio", "agyaragu", "kwandere"], "Keana": ["keana", "giza", "amudu", "kadarko"],
+    "Doma": ["doma", "rukubi", "agbashi", "alagye"], "Awe": ["awe", "azara", "tunga", "ribi"],
+    "Obi": ["obi", "agwatashi", "deddere", "gidan buba"], "Nasarawa": ["nasarawa town", "udenin", "loko", "tunga bajju"],
+    "Toto": ["toto", "umaisha", "gadabuke", "ugya"], "Kokona": ["kokona", "garaku", "kofar gwari", "agwada"],
+    "Akwanga": ["akwanga", "gudi", "andaha"], "Wamba": ["wamba", "arum", "nakere"], "Nasarawa Eggon": ["eggon", "wakama", "umme"]
+  },
+  "routes": {"Awe-Obi-Doma corridor (illustrative)": [[8.10, 9.20], [8.25, 8.90], [8.40, 8.55], [8.45, 8.20]]},
+  "water": [["Lake Doma", 8.40, 8.36], ["Mada River", 8.55, 8.62]],
+  "anomaly_p": 0.01,
+  "baseline_days": 60,
+  "gateway_secret_env": "LAFIAALERT_GATEWAY_SECRET",
+  "port": 5203
+}
