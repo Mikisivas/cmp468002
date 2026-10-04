@@ -1,0 +1,124 @@
+{
+ "dataset_files": 15,
+ "dataset_bytes": 126357,
+ "first_snapshot": {
+  "status": "ok",
+  "id": 1,
+  "files": 15,
+  "chunks": 18,
+  "new_chunks": 18,
+  "bytes_in": 126357,
+  "bytes_new": 24515,
+  "seconds": 0.07,
+  "merkle_root": "4c326f0d7b4ebbe0"
+ },
+ "unchanged_snapshot": {
+  "status": "ok",
+  "id": 2,
+  "files": 15,
+  "chunks": 18,
+  "new_chunks": 0,
+  "bytes_in": 126357,
+  "bytes_new": 0,
+  "seconds": 0.05,
+  "merkle_root": "4c326f0d7b4ebbe0"
+ },
+ "cdc_insert_test": {
+  "chunks_in_file": 31,
+  "new_chunks_after_insert": 1
+ },
+ "recovery": {
+  "files_encrypted": 16,
+  "files_restored": 16,
+  "rto_seconds": 0.01,
+  "byte_identical": true
+ },
+ "verify": {
+  "snapshots": 4,
+  "chunks": 50
+ },
+ "dedup_saving_percent": 92.9,
+ "gc": {
+  "snapshots_dropped": 2,
+  "chunks_removed": 0
+ },
+ "tests": [
+  {
+   "test": "First snapshot stores all files",
+   "passed": true,
+   "detail": "126357 B -> 24515 B, 18 chunks"
+  },
+  {
+   "test": "Unchanged snapshot writes zero new chunks",
+   "passed": true,
+   "detail": "0.05 s"
+  },
+  {
+   "test": "Inserting text at the start changes only a few chunks (CDC)",
+   "passed": true,
+   "detail": "1 new of about 31"
+  },
+  {
+   "test": "Quiet encryption of CSV files is blocked (incompressible content)",
+   "passed": true,
+   "detail": "{'status': 'blocked', 'suspects': 6}"
+  },
+  {
+   "test": "Restore after quiet attack is byte-identical",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Loud attack is blocked",
+   "passed": true,
+   "detail": "{'status': 'blocked', 'suspects': 16}"
+  },
+  {
+   "test": "Recovery after loud attack is byte-identical",
+   "passed": true,
+   "detail": "RTO 0.010 s"
+  },
+  {
+   "test": "Corrupted chunk detected and repaired from mirror",
+   "passed": true,
+   "detail": "['d930fe120bb9']"
+  },
+  {
+   "test": "Mismatched Merkle anchor is reported",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Garbage collection keeps newest snapshots restorable",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Portal outage detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Wrong password refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "POST without CSRF header refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "POST with CSRF header accepted",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Observer cannot restore",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 15,
+ "total": 15
+}

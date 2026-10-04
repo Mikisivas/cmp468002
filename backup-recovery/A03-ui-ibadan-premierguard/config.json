@@ -1,0 +1,25 @@
+{
+  "institution": {
+    "name": "University of Ibadan (Oyo State)",
+    "short": "UI",
+    "matric_format": "{n}2{year}",
+    "departments": ["Computer Science", "Data and Information Science", "Physiology", "Classics", "Agronomy", "Petroleum Engineering", "Law"],
+    "states": ["Oyo", "Ogun", "Osun", "Ondo", "Ekiti", "Lagos", "Kwara", "Kogi"],
+    "courses": ["CSC468", "CSC408", "CSC418", "CSC432"]
+  },
+  "source": "sample_data",
+  "chunk_store": "data/chunks",
+  "mirrors": ["data/mirror_kenneth_dike_library", "data/mirror_ibadan_offsite"],
+  "anchor_dir": "data/anchor_registrar_office",
+  "port": 5103,
+  "portal_port": 8103,
+  "sample_seconds": 15,
+  "snapshot_minutes": 20,
+  "keep_snapshots": 30,
+  "ewma_alpha": 0.2,
+  "ewma_k": 4,
+  "incompressible_ratio": 0.95,
+  "max_suspects": 3,
+  "blocked_extensions": [".locked", ".encrypted", ".crypt", ".lockbit", ".zzz"],
+  "probes": {"UI student portal (HTTP)": "http://127.0.0.1:8103/health", "Portal TCP": "127.0.0.1:8103"}
+}

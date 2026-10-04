@@ -1,0 +1,22 @@
+{
+  "institution": {
+    "name": "Obafemi Awolowo University, Ile-Ife (Osun State)",
+    "short": "OAU",
+    "matric_format": "CSC/{year}/{n}",
+    "departments": ["Computer Science and Engineering", "Fine and Applied Arts", "Pharmacy", "Estate Management", "Chemistry", "Dramatic Arts", "Agricultural Extension"],
+    "states": ["Osun", "Oyo", "Ondo", "Ekiti", "Ogun", "Lagos", "Kwara", "Edo"],
+    "courses": ["CSC468", "CSC405", "CSC415", "CSC427"]
+  },
+  "source": "data/agents",
+  "server_bind": "127.0.0.1",
+  "server_port": 5104,
+  "server_url": "http://127.0.0.1:5104",
+  "heartbeat_seconds": 10,
+  "backup_minutes": 15,
+  "thresholds": {"cpu": 90, "mem": 92, "disk": 92},
+  "demo_agents": [
+    {"name": "REGISTRY-SRV", "location": "Registry, Senate Building", "seed": 1},
+    {"name": "BURSARY-PC1", "location": "Bursary, Central Administration", "seed": 2},
+    {"name": "CSE-LAB-07", "location": "Computer Science and Engineering lab", "seed": 3}
+  ]
+}
