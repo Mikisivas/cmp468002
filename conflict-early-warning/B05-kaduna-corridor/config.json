@@ -1,0 +1,17 @@
+{
+  "project": "KadunaCorridor",
+  "state": "Kaduna",
+  "lgas": [
+    ["Jema'a", 9.583, 8.300, 0.75], ["Kachia", 9.870, 7.950, 0.70], ["Kauru", 10.530, 8.170, 0.75], ["Kajuru", 10.320, 7.680, 0.85],
+    ["Zangon Kataf", 9.780, 8.290, 0.90], ["Kaura", 9.600, 8.390, 0.70], ["Sanga", 9.350, 8.550, 0.55], ["Chikun", 10.400, 7.600, 0.70],
+    ["Kagarko", 9.480, 7.680, 0.50], ["Lere", 10.380, 8.570, 0.45], ["Birnin Gwari", 11.020, 6.780, 0.65], ["Giwa", 11.270, 7.430, 0.40]
+  ],
+  "routes": {"Southern Kaduna corridor (illustrative)": [[10.60, 7.60], [10.30, 7.75], [9.95, 7.95], [9.75, 8.20], [9.45, 8.45]]},
+  "water": [["Kaduna River at Kajuru", 10.30, 7.70]],
+  "fit_days": 300,
+  "test_days": 60,
+  "escalation_ratio": 3.0,
+  "chain_hours": 72,
+  "chain_km": 25,
+  "port": 5205
+}

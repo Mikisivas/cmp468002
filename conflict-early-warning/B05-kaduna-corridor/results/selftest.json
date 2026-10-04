@@ -1,0 +1,103 @@
+{
+ "setup": {
+  "incidents": 349,
+  "fit": {
+   "alpha": 0.25,
+   "memory_days": 5.0,
+   "loglik": -674.71,
+   "n_train": 170,
+   "n_test": 23,
+   "test_loglik_hawkes": -101.15,
+   "test_loglik_poisson": -104.47,
+   "hawkes_better": true
+  }
+ },
+ "setup_seconds": 0.39,
+ "parameter_recovery": {
+  "true_alpha": 0.5,
+  "fitted_alpha": 0.45,
+  "true_memory_days": 3,
+  "fitted_memory_days": 3.0,
+  "events": 769
+ },
+ "sanga": {
+  "before": {
+   "lga": "Sanga",
+   "intensity": 0.0227,
+   "background": 0.0225,
+   "ratio": 1.01,
+   "expected_7d": 0.158,
+   "p_any_7d": 0.146,
+   "status": "background"
+  },
+  "after": {
+   "lga": "Sanga",
+   "intensity": 0.142,
+   "background": 0.0225,
+   "ratio": 6.31,
+   "expected_7d": 0.608,
+   "p_any_7d": 0.455,
+   "status": "ESCALATING"
+  }
+ },
+ "longest_chain": 4,
+ "tests": [
+  {
+   "test": "Fitter recovers known parameters from simulated data (alpha 0.5, memory 3 days)",
+   "passed": true,
+   "detail": "{'true_alpha': 0.5, 'fitted_alpha': 0.45, 'true_memory_days': 3, 'fitted_memory_days': 3.0, 'events': 769}"
+  },
+  {
+   "test": "Evenly spaced (non-clustered) events give a low branching ratio",
+   "passed": true,
+   "detail": "0.0"
+  },
+  {
+   "test": "Fitted on the history: retaliation present (alpha > 0)",
+   "passed": true,
+   "detail": "{'alpha': 0.25, 'memory_days': 5.0, 'loglik': -674.71, 'n_train': 170, 'n_test': 23, 'test_loglik_hawkes': -101.15, 'test_loglik_poisson': -104.47, 'hawkes_better': True}"
+  },
+  {
+   "test": "Hawkes beats Poisson on held-out data (log-likelihood)",
+   "passed": true,
+   "detail": "-101.15 vs -104.47"
+  },
+  {
+   "test": "Three linked attacks in Sanga raise its status to ESCALATING",
+   "passed": true,
+   "detail": "ratio 1.01 -> 6.31"
+  },
+  {
+   "test": "7-day risk rises after the flare",
+   "passed": true,
+   "detail": "0.146 -> 0.455"
+  },
+  {
+   "test": "One escalation warning issued for Sanga",
+   "passed": true,
+   "detail": "ESCALATION WARNING Sanga: violence intensity is 6.31x its background level. Chance of at least one more violent event in 7 days: 46%. Act now to break the retaliation cycle: joint patrol, traditional rulers, youth leaders."
+  },
+  {
+   "test": "No repeated warning within 24 h",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Retaliation chain detected around the Sanga flare",
+   "passed": true,
+   "detail": "3 chains, longest 4"
+  },
+  {
+   "test": "Forecast page renders with intensity charts",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Commander cannot refit the model",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 11,
+ "total": 11
+}
