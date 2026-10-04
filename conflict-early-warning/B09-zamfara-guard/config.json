@@ -1,0 +1,21 @@
+{
+  "project": "ZamfaraGuard",
+  "state": "Zamfara",
+  "lgas": [
+    ["Gusau", 12.160, 6.660, 0.55], ["Maru", 12.330, 6.400, 0.85], ["Anka", 12.110, 5.930, 0.80], ["Tsafe", 11.960, 6.920, 0.80],
+    ["Zurmi", 12.780, 6.780, 0.85], ["Shinkafi", 13.070, 6.500, 0.75], ["Bukkuyum", 12.140, 5.470, 0.70], ["Talata Mafara", 12.570, 6.070, 0.50],
+    ["Bakura", 12.710, 5.870, 0.55], ["Birnin Magaji", 12.550, 7.150, 0.70], ["Kaura Namoda", 12.590, 6.590, 0.60], ["Gummi", 12.140, 5.120, 0.50]
+  ],
+  "routes": {"Sokoto-Gusau-Tsafe route (illustrative)": [[12.80, 5.80], [12.50, 6.10], [12.20, 6.60], [11.95, 6.95]]},
+  "water": [["Bakolori Dam", 12.48, 6.15]],
+  "cluster_km": 5,
+  "cluster_hours": 6,
+  "min_points": 2,
+  "probable": 0.80,
+  "needs_check": 0.55,
+  "new_reporter_cap": 0.60,
+  "copy_similarity": 0.80,
+  "max_reports_per_hour": 4,
+  "pepper_env": "ZAMFARAGUARD_PEPPER",
+  "port": 5209
+}

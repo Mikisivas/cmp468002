@@ -1,0 +1,111 @@
+{
+ "reputation": {
+  "reliable_mean": 0.871,
+  "unreliable_mean": 0.112
+ },
+ "scenario_ms": 64.0,
+ "scenario": {
+  "maru": {
+   "reports": 3,
+   "reporters": 3,
+   "credibility": 0.998,
+   "status": "probable",
+   "flag": null
+  },
+  "gusau": {
+   "reports": 6,
+   "reporters": 6,
+   "credibility": 0.3,
+   "status": "watch",
+   "flag": "possible coordinated false reports (near-identical texts from new numbers)"
+  },
+  "anka": {
+   "reports": 1,
+   "reporters": 1,
+   "credibility": 0.5,
+   "status": "watch"
+  }
+ },
+ "setup": {
+  "past_events": 54
+ },
+ "tests": [
+  {
+   "test": "Reputation learned from past verdicts separates reliable and unreliable informants",
+   "passed": true,
+   "detail": "{'reliable_mean': 0.871, 'unreliable_mean': 0.112}"
+  },
+  {
+   "test": "DBSCAN groups close-in-space-and-time points and leaves others as noise",
+   "passed": true,
+   "detail": "[0, 0, 0, -1, -1]"
+  },
+  {
+   "test": "Jaccard similarity spots copy-paste text",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Real attack, 3 trusted informants: PROBABLE and alert sent",
+   "passed": true,
+   "detail": "{'reports': 3, 'reporters': 3, 'credibility': 0.998, 'status': 'probable', 'flag': None}"
+  },
+  {
+   "test": "Six new numbers with copy-paste rumour: flagged, NOT probable",
+   "passed": true,
+   "detail": "{'reports': 6, 'reporters': 6, 'credibility': 0.3, 'status': 'watch', 'flag': 'possible coordinated false reports (near-identical texts from new numbers)'}"
+  },
+  {
+   "test": "Single unknown reporter stays on WATCH",
+   "passed": true,
+   "detail": "{'reports': 1, 'reporters': 1, 'credibility': 0.5, 'status': 'watch'}"
+  },
+  {
+   "test": "Only Maru triggered a dispatch alert",
+   "passed": true,
+   "detail": "['Maru']"
+  },
+  {
+   "test": "The same informant sending repeats counts once",
+   "passed": true,
+   "detail": "3"
+  },
+  {
+   "test": "Per-number rate limit (5th report in one hour refused)",
+   "passed": true,
+   "detail": "{'accepted': False, 'reason': 'too many reports from this number in one hour'}"
+  },
+  {
+   "test": "Two-source rule: one trusted informant alone gets VERIFY, not dispatch",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Location outside Zamfara rejected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Verdict 'false' lowers trust of the rumour numbers",
+   "passed": true,
+   "detail": "0.5 -> 0.3333333333333333"
+  },
+  {
+   "test": "Phone numbers never stored",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Analyst cannot record verdicts",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Cluster map data needs sign-in",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 15,
+ "total": 15
+}
