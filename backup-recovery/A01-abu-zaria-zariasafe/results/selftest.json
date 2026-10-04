@@ -3,16 +3,16 @@
  "dataset_bytes": 133145,
  "full_backup": {
   "status": "ok",
-  "version": "20261004-152146-115236",
+  "version": "20261004-163035-626682",
   "files": 15,
   "changed": 15,
-  "seconds": 0.004,
+  "seconds": 0.005,
   "bytes_in": 133145,
   "bytes_stored": 133565
  },
  "incremental_backup": {
   "status": "ok",
-  "version": "20261004-152146-127171",
+  "version": "20261004-163035-638765",
   "files": 15,
   "changed": 1,
   "seconds": 0.002,
@@ -21,7 +21,7 @@
  },
  "unchanged_backup": {
   "status": "ok",
-  "version": "20261004-152146-133425",
+  "version": "20261004-163035-648588",
   "files": 15,
   "changed": 0,
   "seconds": 0.002,
@@ -39,7 +39,7 @@
   {
    "test": "First (full) backup stores every file",
    "passed": true,
-   "detail": "15 files in 0.004 s"
+   "detail": "15 files in 0.005 s"
   },
   {
    "test": "Incremental backup copies only the changed file",
@@ -64,7 +64,7 @@
   {
    "test": "Loud attack (.locked + note) is held",
    "passed": true,
-   "detail": "15 files with ransomware extensions (e.g. bursary/fees_2025_2026.csv.locked); 100% of protected files changed or vanished in one interval"
+   "detail": "15 files with ransomware extensions (e.g. bursary/fees_2025_2026.csv.locked); ransom note file present; 100% of protected files changed or vanished in one interval"
   },
   {
    "test": "Full recovery after loud attack is byte-identical and note removed",
@@ -79,7 +79,7 @@
   {
    "test": "Tampered object detected and repaired from replica",
    "passed": true,
-   "detail": "['20261004-152146-115236:registry/students.csv']"
+   "detail": "['20261004-163035-626682:registry/students.csv']"
   },
   {
    "test": "Edited manifest is rejected (HMAC signature)",

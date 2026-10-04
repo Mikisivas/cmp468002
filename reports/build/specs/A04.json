@@ -1,0 +1,120 @@
+{
+ "folder": "A04-oau-ife-ifesentinel",
+ "name": "IfeSentinel",
+ "title": "Agent-Based Monitoring and Zero-Knowledge Backup Across OAU Computers",
+ "institution": "Obafemi Awolowo University, Ile-Ife, Osun State",
+ "intro": "IfeSentinel is built for many computers at once. A small agent runs on each registry server, bursary PC or lab machine. It sends signed heartbeats to one central console, watches decoy (canary) files, and uploads backups that it encrypts itself, so the central server stores only ciphertext. When ransomware touches a computer, that computer is isolated and its clean backup history is frozen. The demo runs three agents (Registry, Bursary, CSE lab) on one laptop. Note: selftest.py leaves test data behind, so run 1_SETUP.bat again after it.",
+ "login": "admin / ChangeMe@468 (helpdesk / ChangeMe@468 is read-only)",
+ "url": "http://127.0.0.1:5104",
+ "design": [
+  "**Agent and central server.** One console shows every enrolled computer as a card: online, offline or isolated.",
+  "**One-time enrolment tokens.** A computer joins with a token that works once. The server then issues it a 256-bit secret.",
+  "**Signed requests with replay protection.** Each agent request carries HMAC-SHA256 over method, path, timestamp, nonce and body hash. Requests older than 120 s or with a reused nonce are refused.",
+  "**Zero-knowledge storage.** The AES-256-GCM data key is created on the agent and never sent. A stolen server disk exposes no student record.",
+  "**Canary (decoy) files** named to be hit first by ransomware (\"!000_Staff_Salaries_2026.xlsx\"). Any change isolates the computer. Text files turning binary also isolates it.",
+  "**Trusted versus untrusted uploads.** Anything uploaded after isolation is kept as evidence but never used for restore.",
+  "**Offline detection** after three missed heartbeats (for example a power cut)."
+ ],
+ "demo": [
+  [
+   "Ransomware on REGISTRY-SRV (canary trip)",
+   "attack --agent REGISTRY-SRV"
+  ],
+  [
+   "Quiet ransomware on BURSARY-PC1",
+   "stealth --agent BURSARY-PC1"
+  ],
+  [
+   "Restore REGISTRY-SRV",
+   "restore --agent REGISTRY-SRV"
+  ],
+  [
+   "Restore BURSARY-PC1",
+   "restore --agent BURSARY-PC1"
+  ],
+  [
+   "Power cut on CSE-LAB-07",
+   "outage --agent CSE-LAB-07"
+  ],
+  [
+   "CSE-LAB-07 power back",
+   "reconnect --agent CSE-LAB-07"
+  ],
+  [
+   "Show agent status",
+   "status"
+  ]
+ ],
+ "script": [
+  [
+   "Every OAU computer we protect is on this screen.",
+   "serve",
+   "Three green cards with CPU, RAM, disk and backup counts"
+  ],
+  [
+   "The CSE lab loses power.",
+   "outage --agent CSE-LAB-07",
+   "After about 30 s the card turns grey: OFFLINE incident"
+  ],
+  [
+   "Ransomware hits the Registry server.",
+   "attack --agent REGISTRY-SRV",
+   "Card turns red: CANARY TRIPPED, isolated"
+  ],
+  [
+   "Ransomware quietly encrypts bursary CSVs.",
+   "stealth --agent BURSARY-PC1",
+   "Bursary card turns red: text files became binary"
+  ],
+  [
+   "Recover the Registry from trusted backups only.",
+   "restore --agent REGISTRY-SRV",
+   "Files back byte-for-byte. Admin clicks Release after clean-up"
+  ],
+  [
+   "The server cannot read our data.",
+   "(open data/server/blobs)",
+   "Blobs are random-looking ciphertext"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Create server database, staff accounts and three demo agents, then take full backups"
+  ],
+  [
+   "serve",
+   "Run the console plus the three demo agents"
+  ],
+  [
+   "server-only",
+   "Run only the console (real deployment)"
+  ],
+  [
+   "token --location \"Bursary PC 2\"",
+   "One-time enrolment token for a new computer"
+  ],
+  [
+   "attack / stealth --agent NAME",
+   "SAFE ransomware simulation on one agent folder"
+  ],
+  [
+   "backup / restore --agent NAME",
+   "Back up or restore one agent"
+  ],
+  [
+   "outage / reconnect --agent NAME",
+   "Simulate a power cut and recovery"
+  ],
+  [
+   "status",
+   "Print agent states"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`server.py` central console and signed agent API. `agent.py` the program that runs on each protected computer. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` settings.",
+ "extra": "## Part C. Using IfeSentinel on several real computers\n\n1. On the server computer, set `\"server_bind\": \"0.0.0.0\"` in `config.json`, allow TCP port 5104 in Windows Firewall, and run `python main.py server-only`.\n2. On the server, create one token per computer: `python main.py token --location \"Bursary PC 2\"`.\n3. Copy `agent.py`, `demo.py`, `config.json` and `requirements.txt` to the other computer, install the requirements, then run\n   `python agent.py enrol --name BURSARY-PC2 --server http://SERVER-IP:5104 --token THE-TOKEN --folder D:\\Bursary`\n4. Start it with `python agent.py run --name BURSARY-PC2`, or add that line to Task Scheduler at start-up.\n5. Back up `data/agents/<name>/agent.json` to a USB stick kept in a safe. It holds that computer's data key. Without it, its backups cannot be decrypted.\n6. For a real network, put the console behind HTTPS (for example a reverse proxy with a university certificate). The HMAC signatures already stop tampering and replay, and backups are already encrypted."
+}

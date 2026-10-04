@@ -42,7 +42,7 @@
   "please send me recharge card": "noise",
   "an toshe hanyar shanu a doma": "blocked_route"
  },
- "pipeline_ms_per_message": 6.11,
+ "pipeline_ms_per_message": 6.36,
  "demo_feed": [
   {
    "id": 1,

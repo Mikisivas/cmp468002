@@ -7,13 +7,13 @@
   "files": 15,
   "plain_bytes": 136249,
   "stored_bytes": 26904,
-  "seconds": 0.01,
+  "seconds": 0.009,
   "key_version": 1
  },
  "recovery": {
   "files_encrypted": 15,
   "files_restored": 15,
-  "rto_seconds": 0.007,
+  "rto_seconds": 0.011,
   "byte_identical": true,
   "custodians_needed": 2
  },
@@ -26,7 +26,7 @@
   {
    "test": "Unattended backup sealed with only the public key",
    "passed": true,
-   "detail": "{'status': 'ok', 'id': 1, 'files': 15, 'plain_bytes': 136249, 'stored_bytes': 26904, 'seconds': 0.01, 'key_version': 1}"
+   "detail": "{'status': 'ok', 'id': 1, 'files': 15, 'plain_bytes': 136249, 'stored_bytes': 26904, 'seconds': 0.009, 'key_version': 1}"
   },
   {
    "test": "Shamir: every pair of shares rebuilds the secret",
@@ -71,7 +71,7 @@
   {
    "test": "Recovery after attack (2 custodians) is byte-identical",
    "passed": true,
-   "detail": "RTO 0.007 s"
+   "detail": "RTO 0.011 s"
   },
   {
    "test": "Key rotation re-wraps every data key",

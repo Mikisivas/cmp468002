@@ -3,17 +3,17 @@
  "dataset_bytes": 139833,
  "first_commit": {
   "status": "ok",
-  "commit": "4c934aefd5f5",
+  "commit": "3bf3020043eb",
   "files": 18,
   "added": 18,
   "changed": 0,
   "removed": 0,
   "new_blobs": 18,
-  "seconds": 0.005
+  "seconds": 0.012
  },
  "incremental_commits": {
   "status": "ok",
-  "commit": "329711e994ee",
+  "commit": "175f3efc5e8d",
   "files": 18,
   "added": 0,
   "changed": 1,
@@ -29,14 +29,14 @@
  "recovery": {
   "files_encrypted": 18,
   "files_restored": 18,
-  "rto_seconds": 0.006,
+  "rto_seconds": 0.009,
   "byte_identical": true
  },
  "tests": [
   {
    "test": "Initial signed commit",
    "passed": true,
-   "detail": "{'status': 'ok', 'commit': '4c934aefd5f5', 'files': 18, 'added': 18, 'changed': 0, 'removed': 0, 'new_blobs': 18, 'seconds': 0.005}"
+   "detail": "{'status': 'ok', 'commit': '3bf3020043eb', 'files': 18, 'added': 18, 'changed': 0, 'removed': 0, 'new_blobs': 18, 'seconds': 0.012}"
   },
   {
    "test": "Daily commits store only the changed blob",
@@ -66,7 +66,7 @@
   {
    "test": "Recovery after loud attack is byte-identical",
    "passed": true,
-   "detail": "RTO 0.006 s"
+   "detail": "RTO 0.009 s"
   },
   {
    "test": "A single edit to a honey file refuses the commit",
@@ -86,12 +86,12 @@
   {
    "test": "Re-encrypted, edited commit is caught (signature or id mismatch)",
    "passed": true,
-   "detail": "{'ok': False, 'commits': 2, 'failed_at': '3714f2b25569', 'error': 'ValueError'}"
+   "detail": "{'ok': False, 'commits': 2, 'failed_at': 'c6a113dc4270', 'error': 'ValueError'}"
   },
   {
    "test": "Insider with the storage key still cannot forge a commit (Ed25519)",
    "passed": true,
-   "detail": "{'ok': False, 'commits': 0, 'failed_at': 'c8024cabafb8', 'error': 'InvalidSignature'}"
+   "detail": "{'ok': False, 'commits': 0, 'failed_at': 'abf6f3329084', 'error': 'InvalidSignature'}"
   },
   {
    "test": "Portal outage detected",

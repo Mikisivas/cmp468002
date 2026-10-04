@@ -1,0 +1,126 @@
+{
+ "folder": "A01-abu-zaria-zariasafe",
+ "name": "ZariaSafe",
+ "title": "Versioned-Mirror Backup, Monitoring and Recovery for Ahmadu Bello University",
+ "institution": "Ahmadu Bello University, Zaria, Kaduna State",
+ "intro": "ZariaSafe monitors the university's servers and student portal, keeps encrypted point-in-time versions of registry, bursary, results, LMS and payroll files, refuses to back up data that looks ransomware-encrypted, and restores any version with a measured recovery time.",
+ "login": "admin / ChangeMe@468 (auditor / ChangeMe@468 is read-only)",
+ "url": "http://127.0.0.1:5101",
+ "design": [
+  "**No web framework.** The console uses Python's built-in `http.server`, so the only packages are `cryptography` and `psutil`.",
+  "**Versioned mirror store.** Each backup is a dated version folder. Only changed files are copied in. A signed manifest records where every file of that version lives, so any point in time can be rebuilt.",
+  "**AES-256-GCM per file** with the file path bound as associated data, so an attacker cannot swap two encrypted files.",
+  "**HMAC-signed manifests** and an **HMAC-chained audit trail**, keyed from a 256-bit master key.",
+  "**Mass-change ransomware detector.** If 30% or more of protected files change or vanish in one interval, or ransomware extensions or ransom notes appear, the backup is held and the clean history is protected.",
+  "**Self-healing.** The scheduler restarts the student portal when it goes down."
+ ],
+ "demo": [
+  [
+   "Show service outage (stop student portal)",
+   "outage"
+  ],
+  [
+   "Quiet ransomware (names unchanged)",
+   "stealth"
+  ],
+  [
+   "Loud ransomware (.locked files + note)",
+   "attack"
+  ],
+  [
+   "Take a backup now (watch it get HELD after an attack)",
+   "backup"
+  ],
+  [
+   "Restore latest good version",
+   "restore"
+  ],
+  [
+   "Verify and repair all backups",
+   "verify"
+  ],
+  [
+   "List versions",
+   "list"
+  ]
+ ],
+ "script": [
+  [
+   "This is ABU's live status.",
+   "serve",
+   "CPU, memory, disk, portal UP, last backup ok"
+  ],
+  [
+   "The student portal crashes.",
+   "outage",
+   "Within 15 s a critical alert, then the portal is restarted and shows UP"
+  ],
+  [
+   "Ransomware encrypts result files quietly.",
+   "stealth",
+   "Click Run backup now: status HELD, 40% of files changed"
+  ],
+  [
+   "A loud attack follows.",
+   "attack",
+   "Open sample_data: .locked files and a ransom note. Backup is HELD again"
+  ],
+  [
+   "We recover.",
+   "restore",
+   "Versions page, Restore on the newest ok version. Files back, note gone, RTO shown"
+  ],
+  [
+   "Prove backups cannot be secretly altered.",
+   "verify",
+   "Checked objects, zero bad. Audit page shows chain INTACT"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Create keys, users and demo data, then take the first backup"
+  ],
+  [
+   "serve",
+   "Start the console and the scheduler"
+  ],
+  [
+   "backup",
+   "Back up now"
+  ],
+  [
+   "restore [--version V] [--to FOLDER]",
+   "Restore a version"
+  ],
+  [
+   "verify",
+   "Decrypt-check every object, repair from replicas"
+  ],
+  [
+   "list",
+   "List versions"
+  ],
+  [
+   "prune --keep N",
+   "Delete old versions no longer needed"
+  ],
+  [
+   "monitor",
+   "One monitoring cycle"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations on the demo folder only"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo student portal"
+  ],
+  [
+   "reset",
+   "Delete all demo data"
+  ]
+ ],
+ "files": "`core.py` backup, detector, monitor, audit. `web.py` console and scheduler. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` automatic tests. `config.json` policy (thresholds, RPO, replicas)."
+}

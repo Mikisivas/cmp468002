@@ -1,0 +1,139 @@
+{
+ "folder": "A10-futa-akure-keyvault",
+ "name": "AkureKeyVault",
+ "title": "Split-Key Envelope-Encrypted Backup with Custodian Shares for the Federal University of Technology, Akure",
+ "institution": "Federal University of Technology, Akure, Ondo State",
+ "intro": "AkureKeyVault answers the question 'who can read our backups?'. Backups are sealed automatically with a public key, so the backup server itself cannot decrypt them. The matching private key exists only as three Shamir shares held by the Registrar, the Bursar and the ICT Director. Any two of them together can restore. Keys can be rotated without re-encrypting archives, and a single backup can be crypto-shredded for an NDPA erasure request.",
+ "login": "operator / ChangeMe@468 (auditor / ChangeMe@468 is read-only). Demo custodian shares are printed by setup and stored in data/shares_to_print/.",
+ "url": "http://127.0.0.1:5110",
+ "design": [
+  "**Envelope encryption.** Each backup gets a fresh AES-256-GCM data key. The data key is wrapped for an X25519 recovery public key (ephemeral ECDH + HKDF-SHA256 + AES-GCM).",
+  "**Shamir's Secret Sharing (2 of 3)** over the prime field 2^521 - 1. Shares carry a checksum so typing mistakes are caught.",
+  "**Unlock ceremony** in the browser: two custodians type their shares. Every ceremony, successful or not, is recorded.",
+  "**Key rotation** issues a new key pair and new shares, then re-wraps every data key. Archives stay untouched and old shares become useless.",
+  "**Crypto-shredding.** Destroying one wrapped data key makes that backup permanently unreadable on every copy, including tape.",
+  "**Three copies** (main store, Obakekere campus, offline tape). Restore falls back to an intact copy if one is damaged.",
+  "**Entropy and extension screening** stops a backup when data looks encrypted."
+ ],
+ "demo": [
+  [
+   "Show the demo custodian shares",
+   "shares"
+  ],
+  [
+   "Quiet ransomware",
+   "stealth"
+  ],
+  [
+   "Loud ransomware",
+   "attack"
+  ],
+  [
+   "Back up now",
+   "backup"
+  ],
+  [
+   "Restore with Registrar + Bursar shares",
+   "restore"
+  ],
+  [
+   "Restore with Bursar + ICT Director shares",
+   "restore --custodians bursar,ict_director"
+  ],
+  [
+   "Rotate the recovery key",
+   "rotate"
+  ],
+  [
+   "Crypto-shred backup 1",
+   "shred --id 1"
+  ],
+  [
+   "Verify copies",
+   "verify"
+  ]
+ ],
+ "script": [
+  [
+   "Backups run with no human and no secret key.",
+   "serve",
+   "Overview: key v1 fingerprint, scheduler backing up"
+  ],
+  [
+   "Ransomware hits the bursary share.",
+   "attack",
+   "Back up now: stopped"
+  ],
+  [
+   "The operator alone cannot decrypt.",
+   "(Backups page, one share only)",
+   "Restore refused"
+  ],
+  [
+   "Registrar and Bursar unlock together.",
+   "restore",
+   "Files restored, ceremony recorded"
+  ],
+  [
+   "The ICT Director leaves the university.",
+   "rotate",
+   "Key v2, data keys re-wrapped, old shares void"
+  ],
+  [
+   "A student asks for erasure under NDPA.",
+   "shred --id 1",
+   "Backup 1 marked SHREDDED and can never be read"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Key pair, shares, users, demo data, first backup"
+  ],
+  [
+   "serve",
+   "Console and scheduler"
+  ],
+  [
+   "backup",
+   "Back up now"
+  ],
+  [
+   "restore [--id N] [--custodians a,b]",
+   "Restore using two demo shares"
+  ],
+  [
+   "rotate",
+   "Rotate the recovery key"
+  ],
+  [
+   "shred --id N",
+   "Crypto-shred one backup"
+  ],
+  [
+   "shares",
+   "Print demo shares"
+  ],
+  [
+   "verify",
+   "Check archive copies"
+  ],
+  [
+   "list",
+   "List backups"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo portal"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`keyvault.py` Shamir, envelope encryption, rotation, shredding, monitoring. `app.py` Flask console with unlock ceremony. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` settings."
+}

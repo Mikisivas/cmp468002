@@ -1,0 +1,146 @@
+{
+ "folder": "A06-unimaid-sahelstore",
+ "name": "SahelStore",
+ "title": "Low-Bandwidth, Power-Aware Backup and Recovery for the University of Maiduguri",
+ "institution": "University of Maiduguri, Borno State",
+ "intro": "SahelStore is designed for a campus where the internet link is slow and expensive and mains power drops often. It keeps compressed, encrypted snapshots on the local server, sends only the changed parts of files to an offsite mirror at night within a daily data budget, and changes its behaviour when the inverter battery runs low. If the local server room is lost, everything comes back from the offsite copy.",
+ "login": "status page: ictstaff / ChangeMe@468 (read-only by design; all actions run from the command line)",
+ "url": "http://127.0.0.1:5106",
+ "design": [
+  "**Read-only web page** (standard library, HTTP Basic login over a PBKDF2 hash). Nothing on the web page can delete or restore data. That shrinks the attack surface.",
+  "**rsync-style delta sync.** A weak rolling checksum and SHA-256 per 2 KiB block find the parts already offsite. In testing a changed 38 KB student register went offsite as 756 bytes.",
+  "**Daily bandwidth budget and off-peak window** (00:00 to 05:30 by default). Files that do not fit wait in a queue for the next night.",
+  "**Power-aware scheduler.** On inverter battery below 40% heavy jobs wait. At 15% it takes one emergency snapshot, then stays idle until mains power returns.",
+  "**LZMA compression + AES-256-GCM**, content-addressed objects so identical files are stored once.",
+  "**Burst detector**: many existing files modified within 60 seconds, or ransomware extensions, refuse the snapshot."
+ ],
+ "demo": [
+  [
+   "Mains power cut, battery 35%",
+   "power-cut"
+  ],
+  [
+   "Battery critical 12%",
+   "battery-critical"
+  ],
+  [
+   "Mains power back",
+   "power-back"
+  ],
+  [
+   "Quiet ransomware",
+   "stealth"
+  ],
+  [
+   "Loud ransomware",
+   "attack"
+  ],
+  [
+   "Snapshot now",
+   "snapshot"
+  ],
+  [
+   "Restore from local store",
+   "restore"
+  ],
+  [
+   "Server room flooded (delete local store)",
+   "lose-local"
+  ],
+  [
+   "Restore from offsite mirror",
+   "restore-offsite"
+  ],
+  [
+   "Show status",
+   "status"
+  ]
+ ],
+ "script": [
+  [
+   "This is UNIMAID's backup status.",
+   "serve",
+   "Power on mains, services UP, offsite queue and bandwidth saved"
+  ],
+  [
+   "NEPA takes the light.",
+   "power-cut",
+   "Within 20 s: battery 35%, heavy jobs deferred"
+  ],
+  [
+   "The inverter is nearly flat.",
+   "battery-critical",
+   "Emergency snapshot logged once"
+  ],
+  [
+   "Ransomware strikes.",
+   "attack",
+   "snapshot: REFUSED, ransomware extension"
+  ],
+  [
+   "The server room floods too.",
+   "lose-local",
+   "Local store gone"
+  ],
+  [
+   "We still recover from Abuja.",
+   "restore-offsite",
+   "All files rebuilt from offsite base + deltas, byte-identical"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, viewer account, demo data, first snapshot and offsite sync"
+  ],
+  [
+   "serve",
+   "Status page and scheduler"
+  ],
+  [
+   "snapshot",
+   "Snapshot now"
+  ],
+  [
+   "sync",
+   "Send the offsite queue now (ignores the window)"
+  ],
+  [
+   "restore",
+   "Restore newest local snapshot"
+  ],
+  [
+   "restore-offsite",
+   "Disaster recovery from the offsite mirror"
+  ],
+  [
+   "power-cut / battery-critical / power-back",
+   "Simulate the inverter"
+  ],
+  [
+   "lose-local",
+   "Delete the local store (simulation)"
+  ],
+  [
+   "status",
+   "Text status"
+  ],
+  [
+   "verify-log",
+   "Check the log hash chain"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo portal"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`sahel.py` snapshots, delta sync, power logic, detection, monitoring. `status_page.py` read-only page and scheduler. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` window, budget, power limits."
+}

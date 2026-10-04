@@ -1,0 +1,103 @@
+{
+ "folder": "B08-kwara-harmony",
+ "name": "KwaraHarmony",
+ "title": "Early Response and Mediation Case Management with Attribute-Based Access Control for Kwara State",
+ "institution": "Kwara State (Baruten, Kaiama, Moro, Edu, Patigi, Asa, Ifelodun and 5 other LGAs)",
+ "intro": "An early warning that nobody acts on prevents nothing. KwaraHarmony follows each incident from report to closure: verification, mediator assignment, mediation, written agreement, 30 days of monitoring, and closure. It flags missed response deadlines, treats a new incident during monitoring as a relapse that reopens mediation, and ranks LGAs by open cases and relapses. Officers only see their own LGAs, mediators only their own cases, field notes are encrypted per case, and the public map export cannot reveal any single family's location.",
+ "login": "password ChangeMe@468 for supervisor, officer_north, officer_south, mediator_aisha, mediator_tunde, auditor",
+ "url": "http://127.0.0.1:5208",
+ "design": [
+  "**Workflow state machine** with an explicit table of allowed moves and the roles allowed to make each one. Skipping a step is impossible.",
+  "**Business rules**: an agreement needs written terms and a compensation figure. A case cannot close before 30 days of monitoring.",
+  "**Attribute-based access control (ABAC)**: decisions use the user's role, their LGAs, the case's LGA and whether they are the assigned mediator. Every refusal is logged.",
+  "**Per-case encryption** of field notes with AES-256-GCM, keys derived by HKDF from a master key and the case number.",
+  "**Relapse detection**: a new case in an LGA with an agreement under monitoring reopens mediation and alerts the supervisor.",
+  "**Service-level monitoring**: verify within 24 h, assign within 48 h, first meeting within 7 days.",
+  "**Privacy-preserving GeoJSON export**: locations snapped to a 10 km grid and cells with fewer than 3 cases suppressed (k-anonymity)."
+ ],
+ "demo": [
+  [
+   "New incident in a community under monitoring (relapse)",
+   "relapse"
+  ],
+  [
+   "Show performance indicators",
+   "kpis"
+  ],
+  [
+   "Show service-level breaches",
+   "sla"
+  ],
+  [
+   "Show LGA risk",
+   "risk"
+  ],
+  [
+   "Print the public GeoJSON export",
+   "export"
+  ]
+ ],
+ "script": [
+  [
+   "Sign in as officer_north.",
+   "serve",
+   "Only northern LGA cases are listed"
+  ],
+  [
+   "Open a case and push it through the workflow.",
+   "(case page)",
+   "Each role sees only the moves it may make"
+  ],
+  [
+   "The mediator writes a confidential note.",
+   "(case page, as mediator_aisha)",
+   "Note readable by her; mediator_tunde and the auditor are refused"
+  ],
+  [
+   "Trouble returns in a community under monitoring.",
+   "relapse",
+   "Dashboard: RELAPSE alert, case back in mediation, LGA risk rises"
+  ],
+  [
+   "Share data with NGOs safely.",
+   "export",
+   "Grid-snapped counts only; small cells suppressed"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Users with LGA attributes and 60 synthetic cases"
+  ],
+  [
+   "serve",
+   "Web app"
+  ],
+  [
+   "relapse",
+   "Simulate a relapse"
+  ],
+  [
+   "kpis",
+   "Performance indicators"
+  ],
+  [
+   "sla",
+   "Service-level breaches"
+  ],
+  [
+   "risk",
+   "LGA risk"
+  ],
+  [
+   "export",
+   "Public GeoJSON"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`cases.py` workflow, ABAC policy, encrypted notes, relapse detection, SLA, risk, export. `app.py` Flask app. `geo.py` geography helpers. `main.py` commands and synthetic history. `selftest.py` tests. `config.json` LGAs, SLA targets, export settings.",
+ "extra": "## Data notice\n\nCases, names of mediators and LGA positions are fictional or approximate."
+}

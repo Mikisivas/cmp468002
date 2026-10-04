@@ -39,7 +39,7 @@
   "chance_rate": 0.2,
   "lift": 4.0
  },
- "scoring_seconds": 0.043,
+ "scoring_seconds": 0.048,
  "kwande_escalation": {
   "before": 8.2,
   "after": 71.8

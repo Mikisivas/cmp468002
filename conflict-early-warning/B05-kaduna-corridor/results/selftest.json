@@ -12,7 +12,7 @@
    "hawkes_better": true
   }
  },
- "setup_seconds": 0.39,
+ "setup_seconds": 0.37,
  "parameter_recovery": {
   "true_alpha": 0.5,
   "fitted_alpha": 0.45,

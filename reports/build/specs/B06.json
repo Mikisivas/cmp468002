@@ -1,0 +1,107 @@
+{
+ "folder": "B06-adamawa-yolashield",
+ "name": "YolaShield",
+ "title": "USSD Incident Reporting with a Signed, Tamper-Evident Ledger for Adamawa State",
+ "institution": "Adamawa State (Numan, Demsa, Lamurde, Girei, Guyuk, Song and 6 other LGAs)",
+ "intro": "YolaShield lets anyone with a basic phone, no data and no smartphone report an incident by dialling *347*22# in English, Hausa or Pidgin. Callers can also hear the alert level for their LGA, get safety advice, or ask for a mediator. Every report is fingerprinted into a hash-chained, Ed25519-signed ledger whose block hashes are also held by the State Peace Commission, so no official can quietly delete or change a report. Personal data stays outside the chain and can be lawfully erased.",
+ "login": "commission / ChangeMe@468 (staff pages and the phone simulator)",
+ "url": "http://127.0.0.1:5206",
+ "design": [
+  "**USSD menu** in Africa's Talking format (CON/END, cumulative text like 2*1*3*2*1*1). The menu is rebuilt from the path, so the server keeps no session state. A telco retry of the same session never duplicates a report.",
+  "**Three languages** in editable JSON packs (lang/en.json, ha.json, pcm.json). A Fulfulde pack can be added by copying en.json.",
+  "**Every screen fits 182 characters** for basic phones, with LGA lists paged 5 at a time.",
+  "**Tamper-evident ledger**: blocks of report fingerprints with Merkle roots, previous-block hash links and Ed25519 signatures. Block hashes are copied to an outside witness file.",
+  "**Verification** detects edited reports, deleted reports, deleted blocks and rewritten blocks.",
+  "**Privacy by design**: phone numbers and details are Fernet-encrypted off-chain. Erasure on request keeps the chain valid.",
+  "**Gateway protection**: shared token plus IP allow-list on the USSD endpoint. The phone simulator needs a staff session and CSRF token."
+ ],
+ "demo": [
+  [
+   "Six simulated USSD calls through the gateway (start 2_START.bat first)",
+   "demo-calls"
+  ],
+  [
+   "Seal pending reports into a block",
+   "seal"
+  ],
+  [
+   "Verify the ledger",
+   "verify"
+  ],
+  [
+   "Insider edits a sealed report in the database",
+   "tamper"
+  ],
+  [
+   "Show LGA risk levels",
+   "risk"
+  ]
+ ],
+ "script": [
+  [
+   "A farmer in Lamurde has only a basic phone.",
+   "(Phone simulator page)",
+   "Dial, choose Hausa, report an attack in 6 key presses"
+  ],
+  [
+   "Several callers report from Lamurde.",
+   "demo-calls",
+   "Calls run through the gateway; reports appear with refs"
+  ],
+  [
+   "Reports are sealed.",
+   "seal",
+   "Ledger page: blocks with hashes, all checks green"
+  ],
+  [
+   "An insider changes a report to hide it.",
+   "tamper",
+   "Ledger page turns red: content changed after sealing"
+  ],
+  [
+   "Callers hear the alert level.",
+   "(simulator: 1, 2, Lamurde)",
+   "Alert level and advice in their language"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, staff account, 60 days of synthetic history"
+  ],
+  [
+   "serve",
+   "USSD endpoint, simulator and staff pages"
+  ],
+  [
+   "demo-calls",
+   "Six gateway calls against the running server"
+  ],
+  [
+   "seal",
+   "Seal pending reports"
+  ],
+  [
+   "verify",
+   "Verify the ledger"
+  ],
+  [
+   "tamper",
+   "Simulate an insider edit"
+  ],
+  [
+   "erase REF",
+   "Lawful erasure of one report's personal data"
+  ],
+  [
+   "risk",
+   "LGA levels"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`ussd.py` menu state machine. `ledger.py` records, blocks, Merkle roots, signatures, verification, erasure, risk. `server.py` standard-library web server. `lang/` language packs. `geo.py` geography and synthetic history. `main.py` commands. `selftest.py` tests. `config.json` LGAs, USSD code, gateway settings.",
+ "extra": "## Language and data notice\n\nThe Hausa and Pidgin texts should be reviewed by native speakers before field use. LGA positions and incidents are synthetic and approximate. A real USSD code is leased from a telco through an aggregator."
+}

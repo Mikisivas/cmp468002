@@ -1,0 +1,108 @@
+{
+ "folder": "B01-benue-peacegrid",
+ "name": "BenuePeaceGrid",
+ "title": "AHP-Weighted Hexagon Risk Grid for Farmer-Herder Conflict Early Warning in Benue State",
+ "institution": "Benue State (Makurdi, Guma, Agatu, Logo, Kwande and 7 other LGAs)",
+ "intro": "BenuePeaceGrid covers Benue State with about 435 hexagonal cells, each about 9 km across. Every cell gets a risk score from five factors: recent incidents, collared herds nearby, closeness to a stock route, farmland exposure, and closeness to water points. The factor weights come from the Analytic Hierarchy Process, so stakeholders can see and argue about them. When a cell crosses the alert line, the LGA's police DPO, peace committee and chairman are alerted.",
+ "login": "admin, analyst or responder / ChangeMe@468. The public report form at /report needs no login.",
+ "url": "http://127.0.0.1:5201",
+ "design": [
+  "**Hexagonal grid** instead of LGA boundaries, so risk can be located to within a few kilometres.",
+  "**Analytic Hierarchy Process (AHP).** A Saaty pairwise matrix in config.json becomes weights by power iteration. The consistency ratio is computed and an inconsistent matrix (CR 0.10 or more) is refused.",
+  "**Five factors**: severity-weighted incidents with a 21-day half-life, herd heads within 10 km, stock-route distance, farmland count, water-point distance. A seasonal multiplier lifts the dry season.",
+  "**HMAC-signed GPS collar pings** with a 5-minute freshness window, so a fake device cannot move herds on the map.",
+  "**Community report form** with an arithmetic check, a 5-per-hour limit per address, Fernet-encrypted phone numbers and HMAC pseudonyms for reporters.",
+  "**Back-test** that scores the grid as it was 60 days ago and measures how many later incidents fell in the top 20% of cells.",
+  "**Leaflet map** with OpenStreetMap tiles, farms, corridors, incidents and live herds."
+ ],
+ "demo": [
+  [
+   "Live feed: herds move, two drift into Guma farms (start 2_START.bat first)",
+   "simulate --steps 30 --interval 2"
+  ],
+  [
+   "Rescore all cells",
+   "score"
+  ],
+  [
+   "Show top 15 cells",
+   "top"
+  ],
+  [
+   "Show AHP weights and consistency",
+   "ahp"
+  ],
+  [
+   "Run the back-test",
+   "backtest"
+  ]
+ ],
+ "script": [
+  [
+   "This is Benue's risk grid today.",
+   "serve",
+   "Coloured hexagons, highest-risk cells listed on the right"
+  ],
+  [
+   "Why does Guma score high?",
+   "(click a Guma hexagon)",
+   "Popup shows each factor value"
+  ],
+  [
+   "The weights are not a black box.",
+   "ahp",
+   "AHP page: matrix, weights, CR = 0.015 (acceptable)"
+  ],
+  [
+   "Herds start moving. Two leave the corridor.",
+   "simulate --steps 30 --interval 2",
+   "Purple herd markers move toward Guma farms"
+  ],
+  [
+   "The grid reacts.",
+   "score",
+   "Guma cells turn High or Severe; Alerts page shows the SMS text and recipients"
+  ],
+  [
+   "Does it actually predict?",
+   "backtest",
+   "Top 20% of cells caught most next-month incidents (lift above 1)"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, users, grid, contacts, synthetic history, devices, first scoring"
+  ],
+  [
+   "serve",
+   "Web app and 60-second scorer"
+  ],
+  [
+   "simulate",
+   "Live herd and report feed (needs serve running)"
+  ],
+  [
+   "score",
+   "Score all cells now"
+  ],
+  [
+   "top",
+   "Top 15 cells"
+  ],
+  [
+   "ahp",
+   "AHP weights and consistency ratio"
+  ],
+  [
+   "backtest",
+   "Hit rate of the top 20% cells"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`grid.py` hexagons, AHP, factors, alerts, signatures, back-test. `geo.py` geography helpers and synthetic history. `app.py` Flask web app. `main.py` commands and live feed. `selftest.py` tests. `config.json` LGAs, corridors, AHP matrix. `static/leaflet` map library.",
+ "extra": "## Data notice\n\nLGA positions are approximate headquarters coordinates and all incidents are synthetic, generated to follow the seasonal pattern described in the literature. Replace them with official boundaries (GRID3 or OCHA) and verified incident data before real use. The map background needs internet. Without it, the cells still draw on a blank background."
+}

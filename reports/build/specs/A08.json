@@ -1,0 +1,131 @@
+{
+ "folder": "A08-buk-kano-kanoshield",
+ "name": "KanoShield",
+ "title": "WORM Backup Vault with Four-Eyes Approval and Two-Factor Sign-In for Bayero University Kano",
+ "institution": "Bayero University, Kano, Kano State",
+ "intro": "KanoShield treats backup as a governance problem. Backups are sealed into a write-once vault that the database itself protects. Restoring over live records or releasing a retention lock early needs two different administrators. Administrators sign in with a password and a 6-digit authenticator code. The system also blocks ransomware-looking data and watches the student portal.",
+ "login": "ictdirector or deputyregistrar / ChangeMe@468 + authenticator code (run `python main.py code --user ictdirector` to see it). auditor / ChangeMe@468 is read-only.",
+ "url": "http://127.0.0.1:5108",
+ "design": [
+  "**WORM vault in SQLite.** Database triggers refuse any UPDATE of a sealed backup and any DELETE before its retention date (30 days by default).",
+  "**Four-eyes rule.** Restore and early release are requests. A second, different admin must approve. Self-approval raises a critical alert.",
+  "**TOTP two-factor sign-in** implemented from RFC 6238 (checked against the RFC test vector) and compatible with phone authenticator apps.",
+  "**scrypt password hashing** and brute-force lock after 5 failures in 15 minutes, with an alert.",
+  "**AES-256-GCM per file** with backup ID and path bound as associated data, HMAC-sealed manifests.",
+  "**Vault replication** with SQLite's online backup API to a second campus and an offline USB copy.",
+  "**Entropy screening** blocks a backup when three or more files look encrypted."
+ ],
+ "demo": [
+  [
+   "Show admin authenticator code",
+   "code --user ictdirector"
+  ],
+  [
+   "Show second admin code",
+   "code --user deputyregistrar"
+  ],
+  [
+   "Try to delete backup 1 (WORM lock)",
+   "try-delete --id 1"
+  ],
+  [
+   "Quiet ransomware",
+   "stealth"
+  ],
+  [
+   "Loud ransomware",
+   "attack"
+  ],
+  [
+   "Seal a backup now",
+   "backup"
+  ],
+  [
+   "Verify the vault",
+   "verify"
+  ],
+  [
+   "Stop the portal (outage)",
+   "outage"
+  ]
+ ],
+ "script": [
+  [
+   "Admins need a password and a phone code.",
+   "code --user ictdirector",
+   "Sign in with ictdirector + the 6 digits"
+  ],
+  [
+   "Can an angry insider delete our backups?",
+   "try-delete --id 1",
+   "WORM: retention lock still active"
+  ],
+  [
+   "Ransomware hits the registry share.",
+   "attack",
+   "Seal a backup now: BLOCKED"
+  ],
+  [
+   "The ICT Director requests a restore.",
+   "(WORM vault page, Request restore)",
+   "Approvals shows 1 pending; ictdirector cannot approve it"
+  ],
+  [
+   "The Deputy Registrar approves.",
+   "(sign in as deputyregistrar, Approve)",
+   "Files restored, alert names both people"
+  ],
+  [
+   "Prove the vault is intact.",
+   "verify",
+   "All blobs checked, zero problems"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, users with TOTP secrets, demo data, first sealed backup"
+  ],
+  [
+   "serve",
+   "Console and scheduler"
+  ],
+  [
+   "code --user NAME",
+   "Current 6-digit code (demo without a phone)"
+  ],
+  [
+   "backup",
+   "Seal a backup"
+  ],
+  [
+   "verify",
+   "Decrypt and hash-check the vault"
+  ],
+  [
+   "replicate",
+   "Copy the vault to the other locations"
+  ],
+  [
+   "try-delete --id N",
+   "Show the WORM lock in action"
+  ],
+  [
+   "list",
+   "List sealed backups"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo portal"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`shield.py` vault, WORM triggers, TOTP, approvals, monitoring. `app.py` Flask console and scheduler. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` retention, limits, services."
+}

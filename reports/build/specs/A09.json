@@ -1,0 +1,126 @@
+{
+ "folder": "A09-uniport-riversrecover",
+ "name": "RiversRecover",
+ "title": "Continuous Data Protection and Point-in-Time Recovery for the University of Port Harcourt Results Database",
+ "institution": "University of Port Harcourt, Choba, Rivers State",
+ "intro": "RiversRecover protects a live examination results database instead of a folder of files. Every insert, update and delete is captured by database triggers, shipped every 5 seconds to an encrypted recovery store, and can be replayed to rebuild the database as it was at any second. Senate-approved results cannot be edited without a logged amendment window, and a burst of grade changes freezes the whole database until a DBA investigates.",
+ "login": "dba / ChangeMe@468 (auditor / ChangeMe@468 is read-only)",
+ "url": "http://127.0.0.1:5109",
+ "design": [
+  "**Continuous data protection.** SQLite triggers write a row image of every change into a journal. Recovery point objective is the 5-second ship interval, not the last nightly backup.",
+  "**Point-in-time recovery** to any second: newest encrypted base snapshot before that moment + replay of the journal. A recovery starts a new timeline, so rolled-back changes are never replayed by mistake.",
+  "**Hash-chained, encrypted journal segments** (AES-256-GCM with the previous segment's SHA-256 bound as associated data).",
+  "**Senate lock.** Database triggers refuse any edit or delete of an approved result unless a DBA opens a short, logged amendment window.",
+  "**Freeze switch.** 40 result changes in 60 seconds, or 10 results turned into an A, freezes every table through triggers.",
+  "**Online base snapshots** with SQLite's backup API (no downtime), copied to two other locations."
+ ],
+ "demo": [
+  [
+   "Normal registry activity",
+   "normal-activity"
+  ],
+  [
+   "Insider changes grades to A",
+   "grade-tamper"
+  ],
+  [
+   "Insider deletes current results",
+   "mass-delete"
+  ],
+  [
+   "Ransomware encrypts the database file",
+   "ransomware"
+  ],
+  [
+   "Recover to now (after ransomware)",
+   "recover"
+  ],
+  [
+   "Unfreeze the database",
+   "unfreeze"
+  ],
+  [
+   "Ship journal now",
+   "ship"
+  ],
+  [
+   "Verify recovery store",
+   "verify"
+  ],
+  [
+   "Show status",
+   "status"
+  ]
+ ],
+ "script": [
+  [
+   "This is UNIPORT's live results database.",
+   "serve",
+   "Writable, row counts, changes-per-minute chart"
+  ],
+  [
+   "A staff member edits a Senate-approved grade.",
+   "grade-tamper",
+   "Approved rows refused. After 33 current grades become A: FROZEN"
+  ],
+  [
+   "They try to delete the evidence.",
+   "mass-delete",
+   "DATABASE FROZEN error"
+  ],
+  [
+   "We roll back to 2 minutes ago.",
+   "(Point-in-time recovery page)",
+   "Pick a time before the tamper. Database rebuilt and writable"
+  ],
+  [
+   "Ransomware encrypts the database file.",
+   "ransomware",
+   "Dashboard: LIVE DATABASE UNREADABLE"
+  ],
+  [
+   "We recover to the last second.",
+   "recover",
+   "Rebuilt from base + journal, no shipped change lost"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Create and seed the live database, ship the journal, take a base snapshot"
+  ],
+  [
+   "serve",
+   "Console and journal shipper"
+  ],
+  [
+   "recover [--to TIME]",
+   "Point-in-time recovery (default: now)"
+  ],
+  [
+   "ship / base",
+   "Ship journal now / take a base snapshot"
+  ],
+  [
+   "verify",
+   "Check the journal chain and base hashes"
+  ],
+  [
+   "unfreeze",
+   "Lift a freeze after investigation"
+  ],
+  [
+   "normal-activity / grade-tamper / mass-delete / ransomware",
+   "Simulations"
+  ],
+  [
+   "status",
+   "Freeze state and row count"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`cdp.py` triggers, journal shipping, freeze, base snapshots, PITR. `app.py` Flask console and shipper. `main.py` commands and simulations. `selftest.py` tests. `config.json` thresholds and locations."
+}

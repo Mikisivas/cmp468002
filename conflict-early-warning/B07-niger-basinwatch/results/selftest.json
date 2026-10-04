@@ -5,7 +5,7 @@
   "incidents": 231,
   "calendar_cells": 96
  },
- "setup_seconds": 0.5,
+ "setup_seconds": 0.55,
  "validation": {
   "lga_months": 432,
   "spearman_rho": 0.321

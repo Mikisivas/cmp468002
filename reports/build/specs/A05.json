@@ -1,0 +1,131 @@
+{
+ "folder": "A05-uniben-beninvault",
+ "name": "BeninVault",
+ "title": "Erasure-Coded Encrypted Backup and Service-Level Monitoring for the University of Benin",
+ "institution": "University of Benin, Benin City, Edo State",
+ "intro": "BeninVault encrypts each backup and splits it into two data shards and one parity shard stored in three different places (Ugbowo ICT Centre, Ekehuan campus, and a cloud bucket). Any one place can burn, flood or be stolen and the backup still restores. It refuses backups that show a rename burst, a ransom note or unreadable text files, and it reports each service's uptime against its SLA target.",
+ "login": "admin / ChangeMe@468 (auditor / ChangeMe@468 is read-only)",
+ "url": "http://127.0.0.1:5105",
+ "design": [
+  "**2 + 1 XOR erasure coding** across three sites. Storage cost is 1.5 times the archive, instead of 3 times for three full copies.",
+  "**Scrubbing**: a scheduled job checks every shard's SHA-256 and rebuilds a missing or damaged shard from the other two.",
+  "**AES-256-GCM** with the backup ID bound as associated data, key derived by **scrypt** (n = 2^15, r = 8).",
+  "**Rename-burst detector**: old file names that reappear with a new extension (students.csv to students.csv.locked) in one interval.",
+  "**Printable-text check** for CSV and TXT files, plus ransom-note detection.",
+  "**SLA uptime chart** per service over 24 hours against a target (99.5% for the portal).",
+  "**Flask with Jinja template files** and a SHA-256 linked activity trail."
+ ],
+ "demo": [
+  [
+   "Stop the student portal (outage)",
+   "outage"
+  ],
+  [
+   "Quiet ransomware on CSV files",
+   "stealth"
+  ],
+  [
+   "Loud ransomware (.locked + note)",
+   "attack"
+  ],
+  [
+   "Back up now",
+   "backup"
+  ],
+  [
+   "Restore newest good backup",
+   "restore"
+  ],
+  [
+   "Lose site A (Ugbowo ICT Centre burns)",
+   "lose-site A"
+  ],
+  [
+   "Scrub and rebuild shards",
+   "scrub"
+  ],
+  [
+   "Show SLA uptime",
+   "sla"
+  ]
+ ],
+ "script": [
+  [
+   "UNIBEN's backups live in three buildings.",
+   "serve",
+   "Three site cards, SLA bars green"
+  ],
+  [
+   "The ICT Centre server room burns.",
+   "lose-site A",
+   "Site A card shows missing shards"
+  ],
+  [
+   "We still restore everything.",
+   "restore",
+   "Restore uses shards B and P. Files byte-identical"
+  ],
+  [
+   "And we rebuild the lost site.",
+   "scrub",
+   "Scrub rebuilt N shards. Site A healthy again"
+  ],
+  [
+   "Ransomware renames our files.",
+   "attack",
+   "Back up now: refused, rename burst and ransom note"
+  ],
+  [
+   "The portal goes down for a while.",
+   "outage",
+   "SLA bar for the portal turns red below the 99.5% line"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, users, demo data, first backup"
+  ],
+  [
+   "serve",
+   "Console and scheduler"
+  ],
+  [
+   "backup",
+   "Back up now"
+  ],
+  [
+   "restore [--id ID] [--to FOLDER]",
+   "Restore from any two healthy shards"
+  ],
+  [
+   "scrub",
+   "Check shards and rebuild missing ones"
+  ],
+  [
+   "lose-site A|B|P",
+   "Wipe one storage site (simulation)"
+  ],
+  [
+   "sla / check",
+   "Show uptime against target / run one check"
+  ],
+  [
+   "list",
+   "List backups"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo portal"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`vault.py` encryption, erasure coding, scrubbing, detection, SLA. `app.py` Flask console and scheduler. `templates/` page templates. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` sites, SLA targets, thresholds."
+}

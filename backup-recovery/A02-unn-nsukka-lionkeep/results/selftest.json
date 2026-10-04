@@ -4,45 +4,45 @@
  "full_backup": {
   "status": "ok",
   "kind": "full",
-  "archive": "20261004-152453-253191-full.lk",
+  "archive": "20261004-163038-263788-full.lk",
   "files": 15,
   "raw_bytes": 130564,
   "stored_bytes": 36492,
-  "seconds": 0.2,
+  "seconds": 0.283,
   "quarantined": 0
  },
  "differential_1": {
   "status": "ok",
   "kind": "diff",
-  "archive": "20261004-152453-642782-diff.lk",
+  "archive": "20261004-163038-806375-diff.lk",
   "files": 1,
   "raw_bytes": 36921,
   "stored_bytes": 13860,
-  "seconds": 0.385,
+  "seconds": 0.536,
   "quarantined": 0
  },
  "differential_2": {
   "status": "ok",
   "kind": "diff",
-  "archive": "20261004-152454-052703-diff.lk",
+  "archive": "20261004-163039-190966-diff.lk",
   "files": 2,
   "raw_bytes": 40319,
   "stored_bytes": 15524,
-  "seconds": 0.405,
+  "seconds": 0.38,
   "quarantined": 0
  },
  "recovery": {
   "files_encrypted": 15,
   "files_restored": 15,
   "archives_used": 2,
-  "rto_seconds": 0.386,
+  "rto_seconds": 0.438,
   "byte_identical": true
  },
  "tests": [
   {
    "test": "Full archive holds every file",
    "passed": true,
-   "detail": "130564 B -> 36492 B in 0.2 s"
+   "detail": "130564 B -> 36492 B in 0.283 s"
   },
   {
    "test": "Differentials are cumulative since the last full",
@@ -77,12 +77,12 @@
   {
    "test": "Full + differential restore after loud attack is byte-identical",
    "passed": true,
-   "detail": "RTO 0.386 s, chain 2"
+   "detail": "RTO 0.438 s, chain 2"
   },
   {
    "test": "Damaged archive detected and repaired from NAS copy",
    "passed": true,
-   "detail": "{'ok': 4, 'repaired': ['20261004-152453-253191-full.lk'], 'lost': []}"
+   "detail": "{'ok': 4, 'repaired': ['20261004-163038-263788-full.lk'], 'lost': []}"
   },
   {
    "test": "GFS tiers (31 Oct = grandfather, Fri = father, Tue = son)",

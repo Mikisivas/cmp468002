@@ -5,14 +5,14 @@
   "db_bytes": 315392
  },
  "base_snapshot": {
-  "base": "base_000001187_1791128669.enc",
+  "base": "base_000001187_1791131458.enc",
   "upto_seq": 1187,
   "bytes": 315420
  },
  "recovery": {
   "encrypted_bytes": 315392,
   "replayed_rows": 13,
-  "rto_seconds": 0.042,
+  "rto_seconds": 0.051,
   "rpo": "last shipped journal row (ship interval 5 s)",
   "exact_match": true
  },
@@ -25,7 +25,7 @@
   {
    "test": "Base snapshot taken with the online backup API",
    "passed": true,
-   "detail": "{'base': 'base_000001187_1791128669.enc', 'upto_seq': 1187, 'bytes': 315420}"
+   "detail": "{'base': 'base_000001187_1791131458.enc', 'upto_seq': 1187, 'bytes': 315420}"
   },
   {
    "test": "Normal edits are journalled and shipped",
@@ -60,7 +60,7 @@
   {
    "test": "Point-in-time recovery to the moment before the tamper is exact",
    "passed": true,
-   "detail": "{'target_time': '2026-10-04 15:44:33.102125', 'base': 1, 'replayed_rows': 7, 'seconds': 0.065}"
+   "detail": "{'target_time': '2026-10-04 16:31:02.309644', 'base': 1, 'replayed_rows': 7, 'seconds': 0.049}"
   },
   {
    "test": "Recovered database is writable and triggers are back",
@@ -75,7 +75,7 @@
   {
    "test": "Recovery after ransomware loses no shipped change (RPO = ship interval)",
    "passed": true,
-   "detail": "RTO 0.042 s"
+   "detail": "RTO 0.051 s"
   },
   {
    "test": "Recovery store chain verifies",

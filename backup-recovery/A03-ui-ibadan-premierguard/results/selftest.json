@@ -9,8 +9,8 @@
   "new_chunks": 18,
   "bytes_in": 126357,
   "bytes_new": 24515,
-  "seconds": 0.07,
-  "merkle_root": "4c326f0d7b4ebbe0"
+  "seconds": 0.072,
+  "merkle_root": "4fd0cf635d93bc12"
  },
  "unchanged_snapshot": {
   "status": "ok",
@@ -20,8 +20,8 @@
   "new_chunks": 0,
   "bytes_in": 126357,
   "bytes_new": 0,
-  "seconds": 0.05,
-  "merkle_root": "4c326f0d7b4ebbe0"
+  "seconds": 0.067,
+  "merkle_root": "4fd0cf635d93bc12"
  },
  "cdc_insert_test": {
   "chunks_in_file": 31,
@@ -30,7 +30,7 @@
  "recovery": {
   "files_encrypted": 16,
   "files_restored": 16,
-  "rto_seconds": 0.01,
+  "rto_seconds": 0.011,
   "byte_identical": true
  },
  "verify": {
@@ -51,7 +51,7 @@
   {
    "test": "Unchanged snapshot writes zero new chunks",
    "passed": true,
-   "detail": "0.05 s"
+   "detail": "0.067 s"
   },
   {
    "test": "Inserting text at the start changes only a few chunks (CDC)",
@@ -76,12 +76,12 @@
   {
    "test": "Recovery after loud attack is byte-identical",
    "passed": true,
-   "detail": "RTO 0.010 s"
+   "detail": "RTO 0.011 s"
   },
   {
    "test": "Corrupted chunk detected and repaired from mirror",
    "passed": true,
-   "detail": "['d930fe120bb9']"
+   "detail": "['f7826bf6a0d0']"
   },
   {
    "test": "Mismatched Merkle anchor is reported",

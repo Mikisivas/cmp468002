@@ -30,7 +30,7 @@
   "hit_rate": 0.273,
   "pai": 4.19
  },
- "analysis_seconds": 0.029,
+ "analysis_seconds": 0.018,
  "flare": {
   "bandwidth_km": 10,
   "incidents_now": 19,

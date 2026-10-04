@@ -1,0 +1,130 @@
+{
+ "folder": "A07-unilorin-harmonyvault",
+ "name": "HarmonyVault",
+ "title": "Signed, Git-Style Backup History with Honey Directories for the University of Ilorin",
+ "institution": "University of Ilorin, Kwara State",
+ "intro": "HarmonyVault stores UNILORIN's records the way Git stores source code: encrypted blobs, trees and commits, each commit pointing to its parent. Every commit is signed with an Ed25519 key, so nobody (not even an insider who steals the storage key) can insert, remove or edit a backup without detection. It watches decoy 'honey' folders that attract intruders, and it flags unusual change rates with a z-score against past backups.",
+ "login": "custodian / ChangeMe@468 (reviewer / ChangeMe@468 is read-only)",
+ "url": "http://127.0.0.1:5107",
+ "design": [
+  "**Git-style object model**: blob (file), tree (folder listing) and commit (tree + parent + author + message). Identical files are stored once.",
+  "**Ed25519 digital signatures** on every commit, with the public-key fingerprint shown on screen. Verification walks HEAD back to the first commit.",
+  "**AES-256-GCM** per object with keyed object IDs (HMAC-SHA256).",
+  "**Timeline interface** with 'what changed' diffs between backups and per-file history.",
+  "**Honey directories** (Exam_Questions_2026_CONFIDENTIAL, Senate_Approved_Results). One edit refuses the commit.",
+  "**Change-rate anomaly**: z-score of changed files against the last 30 commits (share-of-files rule while history is short)."
+ ],
+ "demo": [
+  [
+   "Intruder edits a honey file",
+   "peek-honey"
+  ],
+  [
+   "Quiet ransomware",
+   "stealth"
+  ],
+  [
+   "Loud ransomware",
+   "attack"
+  ],
+  [
+   "Commit a backup now",
+   "commit"
+  ],
+  [
+   "Restore the latest clean commit",
+   "restore"
+  ],
+  [
+   "Verify the whole signed history",
+   "verify"
+  ],
+  [
+   "Show commit log",
+   "log"
+  ],
+  [
+   "Stop the portal (outage)",
+   "outage"
+  ]
+ ],
+ "script": [
+  [
+   "UNILORIN's backups form a signed timeline.",
+   "serve",
+   "Timeline with commits, key fingerprint, portal UP"
+  ],
+  [
+   "Someone opens the exam questions folder and copies a file.",
+   "peek-honey",
+   "Commit backup now: refused, honey file touched"
+  ],
+  [
+   "Ransomware quietly encrypts 6 result files.",
+   "stealth",
+   "Refused: 6 files changed, z = 5 against history"
+  ],
+  [
+   "We roll back.",
+   "restore",
+   "Restore this point on the newest commit. Files byte-identical"
+  ],
+  [
+   "Show exactly what changed between two days.",
+   "(click 'what changed')",
+   "Diff page lists students.csv only"
+  ],
+  [
+   "Prove the history is genuine.",
+   "verify",
+   "Every signature, tree and blob verified"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, users, demo data, honey folders, first commit"
+  ],
+  [
+   "serve",
+   "Console and scheduler"
+  ],
+  [
+   "commit -m TEXT",
+   "Commit a backup"
+  ],
+  [
+   "restore [--commit ID] [--to FOLDER]",
+   "Check out any commit"
+  ],
+  [
+   "diff A B",
+   "Files changed between two commits"
+  ],
+  [
+   "verify",
+   "Verify signatures and every object"
+  ],
+  [
+   "log",
+   "List commits"
+  ],
+  [
+   "peek-honey",
+   "Simulate an intruder editing a honey file"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo portal"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`history.py` object store, signatures, detection, restore. `web.py` timeline console and scheduler. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` settings."
+}

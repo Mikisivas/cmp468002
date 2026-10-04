@@ -1,0 +1,130 @@
+{
+ "folder": "A02-unn-nsukka-lionkeep",
+ "name": "LionKeep",
+ "title": "Full and Differential Encrypted Backup with GFS Rotation for the University of Nigeria",
+ "institution": "University of Nigeria, Nsukka, Enugu State",
+ "intro": "LionKeep protects UNN registry, bursary, results, LMS and payroll files with classic full + differential encrypted archives, three storage copies and Grandfather-Father-Son retention. It checks every file's signature and entropy before backup, keeps suspicious files out of the archives, and watches the student portal.",
+ "login": "admin / ChangeMe@468 (operator and viewer have the same demo password)",
+ "url": "http://127.0.0.1:5102",
+ "design": [
+  "**Flask web dashboard** with three roles: admin (restore), operator (backup and verify), viewer (read only).",
+  "**Full + differential archives.** A full ZIP holds everything. Each differential holds only files changed since the last full, so a restore never needs more than two archives.",
+  "**Fernet encryption** (AES-128-CBC with HMAC-SHA256) under a key derived by PBKDF2 with 600,000 iterations and a random salt.",
+  "**Grandfather-Father-Son retention**: 7 daily sons, 5 Friday fathers, 12 month-end grandfathers.",
+  "**File-signature and entropy validation.** PDFs must start with %PDF, CSVs must still be UTF-8 text, and plain files above 7.2 bits per byte are treated as encrypted. Suspicious files are quarantined instead of overwriting the clean copy. Three or more aborts the backup.",
+  "**SHA-256 hash-linked activity log** and per-account lockout after 5 wrong passwords."
+ ],
+ "demo": [
+  [
+   "Stop the student portal (outage)",
+   "outage"
+  ],
+  [
+   "Quiet ransomware on CSV files",
+   "stealth"
+  ],
+  [
+   "Loud ransomware (.locked + note)",
+   "attack"
+  ],
+  [
+   "Differential backup now",
+   "diff"
+  ],
+  [
+   "Full backup now",
+   "full"
+  ],
+  [
+   "Restore newest archive",
+   "restore"
+  ],
+  [
+   "Verify all archives",
+   "verify"
+  ],
+  [
+   "List archives",
+   "list"
+  ]
+ ],
+ "script": [
+  [
+   "This is UNN's ICT overview.",
+   "serve",
+   "CPU, memory, disk, services UP, last archive"
+  ],
+  [
+   "The portal goes down.",
+   "outage",
+   "Critical alert, the scheduler restarts it"
+  ],
+  [
+   "Ransomware quietly encrypts results.",
+   "stealth",
+   "Click Differential backup now: aborted. Quarantine page lists 6 files"
+  ],
+  [
+   "Full attack.",
+   "attack",
+   "sample_data shows .locked files and a note"
+  ],
+  [
+   "Recover from full + differential.",
+   "restore",
+   "Archives page, Restore. Files back, restore time shown on Overview"
+  ],
+  [
+   "Prove the archives are intact.",
+   "verify",
+   "Verify all archives: ok count, zero lost. Activity log hash chain INTACT"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, users, demo data, first full archive"
+  ],
+  [
+   "serve",
+   "Dashboard and scheduler"
+  ],
+  [
+   "full / diff",
+   "Take a full or differential archive"
+  ],
+  [
+   "restore [--id N] [--to FOLDER]",
+   "Restore full + differential chain"
+  ],
+  [
+   "verify",
+   "Hash and decrypt every archive, repair from copies"
+  ],
+  [
+   "rotate",
+   "Apply Grandfather-Father-Son retention"
+  ],
+  [
+   "list",
+   "List archives"
+  ],
+  [
+   "monitor",
+   "One monitoring cycle"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo portal"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`core.py` archives, validation, GFS, monitoring, log. `app.py` Flask dashboard and scheduler. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` policy."
+}

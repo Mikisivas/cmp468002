@@ -1,0 +1,96 @@
+{
+ "folder": "B03-nasarawa-lafiaalert",
+ "name": "LafiaAlert",
+ "title": "SMS-Based Multilingual Early Warning with Naive Bayes Classification for Nasarawa State",
+ "institution": "Nasarawa State (Lafia, Keana, Doma, Awe, Obi, Toto and 5 other LGAs)",
+ "intro": "LafiaAlert is built around the phone most rural people already have. Community members text what they see in English, Hausa or Pidgin. A Naive Bayes classifier written from scratch decides what kind of incident it is, a gazetteer finds the village and LGA, and reports about the same village are merged into one event so the situation room sees corroboration, not noise. A Poisson test flags an LGA when today's events are far above its normal daily rate.",
+ "login": "supervisor (verify events), operator (send test SMS), viewer (read only) / ChangeMe@468",
+ "url": "http://127.0.0.1:5203",
+ "design": [
+  "**SMS gateway webhook** with HMAC-SHA256 signature and a 5-minute timestamp window, the same pattern Termii and Africa's Talking use. Forged or replayed calls are refused.",
+  "**Multinomial Naive Bayes from scratch** (unigrams + bigrams, Laplace smoothing) over 6 classes including 'noise' for irrelevant texts. Precision, recall, F1 and the confusion matrix are shown on the Model page.",
+  "**Three languages**: English, Hausa ('an kai hari ... yanzu da bindigogi') and Pidgin ('cow don chop my yam').",
+  "**Urgency detection** in all three languages (now/yanzu, gun/bindiga, killed/an kashe).",
+  "**Village gazetteer geocoding** for messages without GPS.",
+  "**Event merging and corroboration**: same village + same type within 6 hours = one event. A second, different sender upgrades an UNCONFIRMED alert to CORROBORATED. The same sender repeating does not count.",
+  "**Poisson spike test** per LGA against a 60-day baseline (alert when p < 0.01).",
+  "**Privacy**: phone numbers are Fernet-encrypted. Staff see only an HMAC pseudonym."
+ ],
+ "demo": [
+  [
+   "Send 10 demo SMS through the signed webhook (start 2_START.bat first)",
+   "demo-feed"
+  ],
+  [
+   "Show today's spike test per LGA",
+   "spikes"
+  ],
+  [
+   "Retrain the classifier",
+   "train"
+  ],
+  [
+   "Classify one message",
+   "classify \"an kai hari a giza yanzu da bindigogi\""
+  ]
+ ],
+ "script": [
+  [
+   "People text us in their own language.",
+   "demo-feed",
+   "Inbox fills: Hausa, Pidgin and English messages classified, noise greyed out"
+  ],
+  [
+   "Two people report the same attack in Giza.",
+   "(Events page)",
+   "One event, 2 senders, alert upgraded to CORROBORATED"
+  ],
+  [
+   "Is Keana unusual today?",
+   "spikes",
+   "Keana p-value below 0.01: SPIKE alert to the State Security Council"
+  ],
+  [
+   "How good is the classifier?",
+   "(Model page)",
+   "Accuracy, precision, recall per class"
+  ],
+  [
+   "Can someone fake the SMS gateway?",
+   "(selftest)",
+   "Forged and replayed webhooks are refused"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, model training, users, 120 days of synthetic history"
+  ],
+  [
+   "serve",
+   "Webhook and dashboard"
+  ],
+  [
+   "demo-feed",
+   "Send 10 signed demo SMS to the running server"
+  ],
+  [
+   "classify \"TEXT\"",
+   "Classify one message"
+  ],
+  [
+   "train",
+   "Retrain the classifier"
+  ],
+  [
+   "spikes",
+   "Poisson spike test for every LGA"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`nlp.py` Naive Bayes, training corpus, urgency, gazetteer. `pipeline.py` webhook check, ingest, merge, Poisson test, alerts. `app.py` Flask dashboard and webhook. `geo.py` geography and synthetic history. `main.py` commands. `selftest.py` tests. `config.json` LGAs, gazetteer, thresholds.",
+ "extra": "## Data notice\n\nThe training messages are generated from templates, so accuracy on them is higher than you should expect on real texts. Retrain on labelled messages from the real hotline before use. LGA positions and incidents are synthetic and approximate."
+}

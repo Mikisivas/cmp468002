@@ -1,0 +1,91 @@
+{
+ "folder": "B02-plateau-plateauwatch",
+ "name": "PlateauWatch",
+ "title": "Offline Kernel-Density Hotspot Early Warning for Farmer-Herder Conflict in Plateau State",
+ "institution": "Plateau State (Bokkos, Barkin Ladi, Mangu, Riyom, Bassa, Wase and 6 other LGAs)",
+ "intro": "PlateauWatch turns incident points into a heat surface with kernel density estimation, finds the hotspots, and compares the last 30 days with the 30 days before to say which hotspots are emerging, persistent or fading. An emerging hotspot raises an alert for an assessment team. The whole system runs on Python's standard library plus one package, and the map is drawn on the server as SVG, so it works with no internet at all.",
+ "login": "coordinator / ChangeMe@468 (can import data), observer / ChangeMe@468 (view only)",
+ "url": "http://127.0.0.1:5202",
+ "design": [
+  "**Offline-first.** No map tiles, no JavaScript. The server draws the density surface, LGAs, corridors, incidents and hotspot rings as SVG. The Content-Security-Policy blocks every external resource.",
+  "**Gaussian kernel density estimation** on a 3 km raster, weighted by incident severity, with the kernel normalised so each incident's weight integrates to 1.",
+  "**Silverman's rule of thumb** for bandwidth, capped at 10 km because the rule assumes one cluster and over-smooths multi-cluster conflict data.",
+  "**Emerging hotspot analysis**: local maxima above the 90th percentile, compared with the previous 30-day window.",
+  "**Predictive Accuracy Index (PAI)** evaluation: share of next-month incidents inside the top 10% density area, divided by that area's share.",
+  "**Validated CSV import** for police and NGO data: unknown LGAs, bad severities, locations outside the state and unknown types are rejected with a reason.",
+  "**Standard-library web server** with PBKDF2 passwords, session tokens, CSRF tokens and login lockout."
+ ],
+ "demo": [
+  [
+   "New wave of attacks in quiet Kanam (emerging hotspot)",
+   "flare --lga Kanam"
+  ],
+  [
+   "Run hotspot analysis",
+   "analyse"
+  ],
+  [
+   "Predictive Accuracy Index",
+   "pai"
+  ]
+ ],
+ "script": [
+  [
+   "This map needs no internet.",
+   "serve",
+   "Heat surface, LGAs, corridors. Switch last 7, 30, 90 days"
+  ],
+  [
+   "Where are the hotspots and are they growing?",
+   "(Hotspots page)",
+   "Mangu persistent (intensifying), others"
+  ],
+  [
+   "Attacks start in Kanam, a quiet LGA.",
+   "flare --lga Kanam",
+   "Kanam appears as EMERGING with a red ring, alert written"
+  ],
+  [
+   "Is KDE better than guessing?",
+   "pai",
+   "PAI above 1: the top 10% area holds far more than 10% of next-month incidents"
+  ],
+  [
+   "Police send data as a spreadsheet.",
+   "(Data page, paste CSV)",
+   "Good rows imported, bad rows rejected with reasons"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Users and 240 days of synthetic history"
+  ],
+  [
+   "serve",
+   "Offline web server (analysis every 5 minutes)"
+  ],
+  [
+   "analyse",
+   "Hotspot analysis now"
+  ],
+  [
+   "flare --lga NAME",
+   "Simulate a wave of attacks"
+  ],
+  [
+   "pai",
+   "Predictive Accuracy Index back-test"
+  ],
+  [
+   "import FILE.csv",
+   "Import incidents"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`kde.py` density, bandwidth, hotspots, emerging analysis, PAI, CSV import. `server.py` standard-library web server and SVG map. `geo.py` geography and synthetic history. `main.py` commands. `selftest.py` tests. `config.json` LGAs, corridors, cell size, bandwidth.",
+ "extra": "## Data notice\n\nLGA positions are approximate and all incidents are synthetic. Replace them with official boundaries and verified incident data before real use."
+}

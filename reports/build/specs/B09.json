@@ -1,0 +1,79 @@
+{
+ "folder": "B09-zamfara-guard",
+ "name": "ZamfaraGuard",
+ "title": "Trust-Weighted Verification of Crowdsourced Conflict Reports Against Disinformation in Zamfara State",
+ "institution": "Zamfara State (Gusau, Maru, Anka, Tsafe, Zurmi, Shinkafi and 6 other LGAs)",
+ "intro": "Open reporting lines are attacked with rumours: one false 'they have killed many people, share this' message can start a reprisal. ZamfaraGuard treats every report as evidence of uncertain quality. Each anonymous reporter earns a reputation from past verified reports, reports about the same event are grouped in space and time, independent sources are combined, and copy-paste floods from new SIM cards are flagged. Only well-supported events trigger a dispatch. The rest go to a verifier or stay on watch.",
+ "login": "verifier / ChangeMe@468 (records true/false verdicts), analyst / ChangeMe@468. Public form at /report.",
+ "url": "http://127.0.0.1:5209",
+ "design": [
+  "**Beta reputation** per pseudonymous reporter: trust = (1 + confirmed) / (2 + confirmed + false). In the demo, reliable informants reach 0.87 and rumour spreaders fall to 0.11.",
+  "**DBSCAN space-time clustering** (5 km and 6 hours) groups reports of one event.",
+  "**Noisy-OR credibility** over distinct reporters. The same person repeating counts once.",
+  "**Sybil cap**: brand-new numbers together can add at most 0.60 credibility.",
+  "**Copy-paste flood detection** with word-set Jaccard similarity. Flagged clusters lose half their credibility.",
+  "**Two-source rule**: a dispatch alert needs credibility of at least 0.80 and two independent reporters.",
+  "**Privacy**: phones become HMAC pseudonyms and are never stored. Locations are rounded to about 100 m. 4 reports per number per hour."
+ ],
+ "demo": [
+  [
+   "Run the scenario: real attack in Maru + rumour flood about Gusau",
+   "scenario"
+  ],
+  [
+   "List today's clusters",
+   "clusters"
+  ]
+ ],
+ "script": [
+  [
+   "Our informants have track records.",
+   "serve",
+   "Reporters page: trust per pseudonym"
+  ],
+  [
+   "Two things happen at once.",
+   "scenario",
+   "Maru: 3 trusted informants, PROBABLE, alert. Gusau: 6 new numbers, same text, flagged, WATCH"
+  ],
+  [
+   "Why not believe the Gusau messages?",
+   "(Clusters page)",
+   "Flag: near-identical texts from new numbers; credibility 0.30"
+  ],
+  [
+   "The verifier checks Gusau: it was false.",
+   "(Verify False)",
+   "Those 6 numbers lose trust for next time"
+  ],
+  [
+   "Can one person trigger a dispatch?",
+   "(selftest)",
+   "No: two-source rule gives VERIFY"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Users and 30 days of past reports with verdicts"
+  ],
+  [
+   "serve",
+   "Web app"
+  ],
+  [
+   "scenario",
+   "Send the real-plus-rumour scenario"
+  ],
+  [
+   "clusters",
+   "Today's clusters"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`trust.py` reputation, DBSCAN, credibility, flood detection, verdicts. `app.py` Flask app and map. `geo.py` geography helpers. `main.py` commands and scenario. `selftest.py` tests. `config.json` LGAs and thresholds. `static/leaflet` map library.",
+ "extra": "## Data notice\n\nAll reports are synthetic. Thresholds (5 km, 6 h, 0.80, 0.60) are starting values to tune with real verified data."
+}

@@ -1,0 +1,95 @@
+{
+ "folder": "B05-kaduna-corridor",
+ "name": "KadunaCorridor",
+ "title": "Hawkes Self-Exciting Process Forecasting of Retaliatory Farmer-Herder Violence in Southern Kaduna",
+ "institution": "Kaduna State (Jema'a, Kachia, Kauru, Kajuru, Zangon Kataf, Kaura, Sanga and 5 other LGAs)",
+ "intro": "In Southern Kaduna one attack often triggers a reprisal, which triggers another. KadunaCorridor models that directly with a Hawkes self-exciting process: every violent event temporarily raises the chance of more events in the same LGA, and the boost fades over days. The system fits the model by maximum likelihood, shows each LGA's current intensity against its normal background, forecasts the next 7 days, and lists retaliation chains so mediators know which cycle to break.",
+ "login": "analyst / ChangeMe@468 (can refit the model), commander / ChangeMe@468",
+ "url": "http://127.0.0.1:5205",
+ "design": [
+  "**Hawkes process** with an exponential kernel: intensity = background + alpha x beta x sum of exp(-beta x time since each past event).",
+  "**Maximum likelihood fitting** by grid search over the branching ratio alpha and memory 1/beta, with an O(n) recursive likelihood. Background rates per LGA use a closed-form estimate.",
+  "**Validated fitter**: on data simulated with Ogata's thinning algorithm (alpha 0.5, memory 3 days) it recovered alpha 0.45 and memory 3.0 days.",
+  "**Held-out comparison** with a plain Poisson model on the last 60 days.",
+  "**Escalation status**: intensity at least 3x background = ESCALATING, with the probability of at least one more violent event in the next 7 days.",
+  "**Retaliation chains**: violent events within 72 hours and 25 km of an earlier one are linked.",
+  "**Server-drawn SVG intensity charts** for the four most elevated LGAs."
+ ],
+ "demo": [
+  [
+   "An attack and two reprisals in Sanga",
+   "flare --lga Sanga"
+  ],
+  [
+   "Show the 7-day forecast",
+   "forecast"
+  ],
+  [
+   "Refit the model",
+   "fit"
+  ],
+  [
+   "List retaliation chains",
+   "chains"
+  ]
+ ],
+ "script": [
+  [
+   "Every LGA has a normal level of violence.",
+   "serve",
+   "Forecast table: mostly background, ratio near 1"
+  ],
+  [
+   "How much does one attack provoke?",
+   "(Model page)",
+   "alpha about 0.25: each violent event triggers about a quarter of another; memory 5 days"
+  ],
+  [
+   "An attack in Sanga, then two reprisals.",
+   "flare --lga Sanga",
+   "Sanga ESCALATING, about 6x background, 7-day risk jumps"
+  ],
+  [
+   "Which cycle should mediators break?",
+   "(Retaliation chains page)",
+   "Chain of events linked within 72 h and 25 km"
+  ],
+  [
+   "Is this better than counting?",
+   "fit",
+   "Held-out log-likelihood: Hawkes beats Poisson"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Users, 400 days of synthetic history, first fit and forecast"
+  ],
+  [
+   "serve",
+   "Web app"
+  ],
+  [
+   "fit",
+   "Refit the Hawkes model"
+  ],
+  [
+   "forecast",
+   "Forecast every LGA"
+  ],
+  [
+   "flare --lga NAME",
+   "Simulate an attack and two reprisals"
+  ],
+  [
+   "chains",
+   "Top retaliation chains"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`hawkes.py` likelihood, fitting, simulation, forecast, chains. `app.py` Flask app with SVG charts. `geo.py` geography and synthetic history. `main.py` commands. `selftest.py` tests. `config.json` LGAs and thresholds.",
+ "extra": "## Data notice\n\nIncidents are synthetic, generated with a retaliation mechanism. Feed verified police, NEMA or ACLED records before real use. LGA positions are approximate."
+}

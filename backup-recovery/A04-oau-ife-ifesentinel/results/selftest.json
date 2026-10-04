@@ -14,7 +14,7 @@
     "status": "uploaded",
     "id": 2,
     "files": 27,
-    "bytes": 19265,
+    "bytes": 19261,
     "trusted": true
    }
   },
@@ -23,7 +23,7 @@
     "status": "uploaded",
     "id": 3,
     "files": 27,
-    "bytes": 19246,
+    "bytes": 19241,
     "trusted": true
    }
   }
@@ -33,14 +33,14 @@
   "status": "uploaded",
   "id": 4,
   "files": 1,
-  "bytes": 6530,
+  "bytes": 6534,
   "trusted": true
  },
  "recovery": {
   "files_encrypted": 27,
   "files_restored": 27,
   "blobs_used": 2,
-  "rto_seconds": 0.012,
+  "rto_seconds": 0.013,
   "byte_identical": true
  },
  "blobs_on_server": 5,
@@ -73,7 +73,7 @@
   {
    "test": "Incremental upload carries only the changed file",
    "passed": true,
-   "detail": "{'status': 'uploaded', 'id': 4, 'files': 1, 'bytes': 6530, 'trusted': True}"
+   "detail": "{'status': 'uploaded', 'id': 4, 'files': 1, 'bytes': 6534, 'trusted': True}"
   },
   {
    "test": "Server stores ciphertext only (no readable records)",
@@ -88,12 +88,12 @@
   {
    "test": "Uploads after the trip are marked untrusted",
    "passed": true,
-   "detail": "{'status': 'uploaded', 'id': 5, 'files': 28, 'bytes': 105614, 'trusted': False}"
+   "detail": "{'status': 'uploaded', 'id': 5, 'files': 28, 'bytes': 105613, 'trusted': False}"
   },
   {
    "test": "Restore skips untrusted uploads and is byte-identical",
    "passed": true,
-   "detail": "RTO 0.012 s"
+   "detail": "RTO 0.013 s"
   },
   {
    "test": "Canaries are intact again after restore",

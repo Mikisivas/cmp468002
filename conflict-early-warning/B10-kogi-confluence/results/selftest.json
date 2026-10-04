@@ -21,8 +21,8 @@
  "retry_after_lost_reply": {
   "code": 200,
   "acked": [
-   "1acaac96-e58f-4361-8c33-c8a027905fca",
-   "d3bff4f3-6262-4ad9-97ba-99f9cebef1ef"
+   "3e2126aa-a89e-4661-88c0-719957af3cd7",
+   "f41fd3e9-6b89-4107-bb0f-115dbd78a618"
   ],
   "new": 0,
   "updated": 0,
@@ -81,7 +81,7 @@
   {
    "test": "Retry is idempotent: 0 new, 2 recognised duplicates, queue cleared",
    "passed": true,
-   "detail": "{'code': 200, 'acked': ['1acaac96-e58f-4361-8c33-c8a027905fca', 'd3bff4f3-6262-4ad9-97ba-99f9cebef1ef'], 'new': 0, 'updated': 0, 'duplicates': 2, 'pending': 0}"
+   "detail": "{'code': 200, 'acked': ['3e2126aa-a89e-4661-88c0-719957af3cd7', 'f41fd3e9-6b89-4107-bb0f-115dbd78a618'], 'new': 0, 'updated': 0, 'duplicates': 2, 'pending': 0}"
   },
   {
    "test": "Hub holds exactly 2 reports (no duplicates)",

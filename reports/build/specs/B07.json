@@ -1,0 +1,98 @@
+{
+ "folder": "B07-niger-basinwatch",
+ "name": "NigerBasinWatch",
+ "title": "Seasonal Transhumance Pressure Forecasting from Vegetation and Rainfall Data for Niger State",
+ "institution": "Niger State (Mokwa, Mariga, Rafi, Shiroro, Borgu, Agwara, Mashegu and 5 other LGAs)",
+ "intro": "NigerBasinWatch works weeks ahead instead of hours ahead. It reads weekly vegetation (NDVI) and rainfall for each LGA and for the Sahel zone that herds come from, combines northern dryness, local pasture and water, stock routes and the crop calendar into a Transhumance Pressure Index, and projects it 8 weeks forward as a colour-coded calendar. Planners can then open routes, agree water-point timetables and place mediators before herds arrive. Every dataset version carries a sealed SHA-256 fingerprint, so a quietly edited file is caught before it misleads the forecast.",
+ "login": "analyst / ChangeMe@468 (imports datasets), planner / ChangeMe@468",
+ "url": "http://127.0.0.1:5207",
+ "design": [
+  "**Transhumance Pressure Index** = sqrt(northern dryness) x local pull (pasture, water, route) x share of crops in the field.",
+  "**8-week projection**: current NDVI anomalies decay toward the weekly climatology (persistence 0.85 per week) while the crop calendar moves forward.",
+  "**Risk calendar heatmap** (LGA x week) and per-LGA NDVI charts drawn as SVG.",
+  "**Validated dataset import**: area names, ISO dates, NDVI range and rainfall range are checked. A file with more than 5% bad rows is refused.",
+  "**Data provenance**: each dataset version's SHA-256 is sealed with HMAC. The calendar page shows a red integrity warning if any stored file or fingerprint record changes.",
+  "**Simulation-study validation** with Spearman rank correlation between monthly TPI and incident counts."
+ ],
+ "demo": [
+  [
+   "New satellite week: northern drought",
+   "drought"
+  ],
+  [
+   "Recompute the 8-week calendar",
+   "forecast"
+  ],
+  [
+   "Validate TPI against incidents",
+   "validate"
+  ],
+  [
+   "Verify dataset fingerprints",
+   "verify-data"
+  ]
+ ],
+ "script": [
+  [
+   "This is the next 8 weeks for Niger State.",
+   "serve",
+   "Calendar heatmap with TPI per LGA and week"
+  ],
+  [
+   "Why is Mokwa red in week 4?",
+   "(click Mokwa)",
+   "Chart: Mokwa green but the northern source zone is drying"
+  ],
+  [
+   "A new satellite week shows drought in the Sahel.",
+   "drought",
+   "Projected pressure rises in every LGA; seasonal warnings issued"
+  ],
+  [
+   "Someone edits the NDVI file to hide the drought.",
+   "verify-data",
+   "File changed after import: the calendar shows a red integrity warning"
+  ],
+  [
+   "Does TPI follow conflict?",
+   "validate",
+   "Spearman rho between monthly TPI and incidents"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Users, 3 years of synthetic NDVI and rainfall, simulated incidents, first calendar"
+  ],
+  [
+   "serve",
+   "Web app"
+  ],
+  [
+   "forecast",
+   "Recompute the calendar (top 10 printed)"
+  ],
+  [
+   "drought",
+   "Import a drought week and compare peaks"
+  ],
+  [
+   "validate",
+   "Spearman correlation"
+  ],
+  [
+   "verify-data",
+   "Check dataset fingerprints"
+  ],
+  [
+   "import FILE.csv",
+   "Import a dataset"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`tpi.py` index, climatology, forecast, dataset import and sealing, validation. `app.py` Flask app. `geo.py` geography helpers. `main.py` commands and simulation. `selftest.py` tests. `config.json` LGAs, routes, water, crop calendar.",
+ "extra": "## Data notice\n\nNDVI, rainfall and incidents are synthetic. The validation is a simulation study: it shows the pipeline recovers a signal that was built into the data, not that the index predicts real conflict. Real use needs MODIS or Sentinel NDVI (for example from the FEWS NET or Copernicus portals), CHIRPS rainfall, and verified incident data."
+}

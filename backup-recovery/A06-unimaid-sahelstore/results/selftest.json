@@ -8,7 +8,7 @@
   "new_objects": 15,
   "bytes_in": 133395,
   "bytes_stored": 21756,
-  "secs": 0.112
+  "secs": 0.091
  },
  "delta_sync": {
   "files": 1,
@@ -18,8 +18,8 @@
  "recovery": {
   "files_encrypted": 15,
   "files_restored": 15,
-  "rto_seconds": 0.009,
-  "offsite_rto_seconds": 0.016,
+  "rto_seconds": 0.006,
+  "offsite_rto_seconds": 0.01,
   "byte_identical": true
  },
  "tests": [
@@ -81,12 +81,12 @@
   {
    "test": "Local recovery after loud attack is byte-identical",
    "passed": true,
-   "detail": "RTO 0.009 s"
+   "detail": "RTO 0.006 s"
   },
   {
    "test": "Local store destroyed: full recovery from offsite base + deltas",
    "passed": true,
-   "detail": "0.016 s"
+   "detail": "0.010 s"
   },
   {
    "test": "Tampered offsite object is rejected (GCM tag)",

@@ -24,7 +24,7 @@
   "grid_km": 10,
   "k": 3,
   "suppressed_cases": 31,
-  "generated": "2026-10-04T16:20:40"
+  "generated": "2026-10-04T16:31:16"
  },
  "denied_attempts_logged": 6,
  "tests": [
@@ -86,7 +86,7 @@
   {
    "test": "Officer sees only their own LGAs",
    "passed": true,
-   "detail": "{'Isin', 'Ilorin South', 'Ekiti', 'Oyun', 'Asa', 'Ilorin East'}"
+   "detail": "{'Ekiti', 'Oyun', 'Isin', 'Asa', 'Ilorin East', 'Ilorin South'}"
   },
   {
    "test": "Mediator sees only assigned cases",

@@ -3,7 +3,7 @@
   "reliable_mean": 0.871,
   "unreliable_mean": 0.112
  },
- "scenario_ms": 64.0,
+ "scenario_ms": 66.1,
  "scenario": {
   "maru": {
    "reports": 3,

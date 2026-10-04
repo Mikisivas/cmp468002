@@ -6,8 +6,8 @@
   "id": 1,
   "files": 15,
   "bytes": 137439,
-  "seconds": 0.026,
-  "retain_until": "2026-11-03 15:40:34"
+  "seconds": 0.03,
+  "retain_until": "2026-11-03 16:30:56"
  },
  "recovery": {
   "files_encrypted": 15,
@@ -24,7 +24,7 @@
   {
    "test": "Backup sealed into the WORM vault",
    "passed": true,
-   "detail": "{'status': 'ok', 'id': 1, 'files': 15, 'bytes': 137439, 'seconds': 0.026, 'retain_until': '2026-11-03 15:40:34'}"
+   "detail": "{'status': 'ok', 'id': 1, 'files': 15, 'bytes': 137439, 'seconds': 0.03, 'retain_until': '2026-11-03 16:30:56'}"
   },
   {
    "test": "RFC 6238 test vector (SHA-1, T=59 s) gives 287082",

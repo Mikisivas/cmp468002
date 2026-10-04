@@ -1,0 +1,127 @@
+{
+ "folder": "A03-ui-ibadan-premierguard",
+ "name": "PremierGuard",
+ "title": "De-duplicated, Merkle-Verified Snapshot Backup for the University of Ibadan",
+ "institution": "University of Ibadan, Oyo State",
+ "intro": "PremierGuard cuts every protected file into content-defined chunks, stores each unique chunk once (encrypted with ChaCha20-Poly1305), and seals each snapshot with a Merkle root that is copied to a separate anchor location. It blocks snapshots when files stop compressing like text, which is how encrypted ransomware output behaves, and it monitors the student portal with an adaptive CPU baseline.",
+ "login": "admin / ChangeMe@468 (observer / ChangeMe@468 is read-only)",
+ "url": "http://127.0.0.1:5103",
+ "design": [
+  "**Single-page dashboard over a JSON API.** The browser calls the API with fetch(). Every POST needs an X-CSRF-Token header.",
+  "**Content-defined chunking** with a Gear rolling hash (2 KiB to 64 KiB chunks, about 8 KiB average). Inserting one line at the start of a 250 KB file changed 1 chunk out of 31 in testing.",
+  "**De-duplication with keyed chunk IDs** (HMAC-SHA256), so the store does not reveal whether a known file is inside.",
+  "**ChaCha20-Poly1305** per chunk, keys derived from one root key with HKDF-SHA256 (separate keys for chunk IDs, chunk data and snapshot trees).",
+  "**Merkle tree per snapshot.** The root is written to an anchor log kept elsewhere (the Registrar's office in the demo). Restore refuses a tree whose root does not match.",
+  "**Compressibility detector.** CSV and text files normally compress to under 40%. Ciphertext does not compress. Three or more incompressible text files block the snapshot.",
+  "**EWMA CPU baseline** instead of a fixed threshold."
+ ],
+ "demo": [
+  [
+   "Stop the student portal (outage)",
+   "outage"
+  ],
+  [
+   "Quiet ransomware on CSV files",
+   "stealth"
+  ],
+  [
+   "Loud ransomware (.locked + note)",
+   "attack"
+  ],
+  [
+   "Snapshot now",
+   "snapshot"
+  ],
+  [
+   "Restore newest good snapshot",
+   "restore"
+  ],
+  [
+   "Verify Merkle roots and chunks",
+   "verify"
+  ],
+  [
+   "List snapshots",
+   "list"
+  ]
+ ],
+ "script": [
+  [
+   "This is UI's live dashboard.",
+   "serve",
+   "CPU with its normal level, portal UP, de-dup saving"
+  ],
+  [
+   "The portal fails.",
+   "outage",
+   "DOWN event within 15 s, then UP after automatic restart"
+  ],
+  [
+   "Quiet ransomware.",
+   "stealth",
+   "Snapshot now: status blocked, 6 files look encrypted"
+  ],
+  [
+   "Loud ransomware.",
+   "attack",
+   ".locked files and a ransom note in sample_data"
+  ],
+  [
+   "Recover.",
+   "restore",
+   "Restore on the newest ok snapshot. Files back byte-for-byte"
+  ],
+  [
+   "Prove nothing was altered.",
+   "verify",
+   "Snapshots and chunks verified against the Merkle anchors"
+  ]
+ ],
+ "commands": [
+  [
+   "setup",
+   "Keys, accounts, demo data, first snapshot"
+  ],
+  [
+   "serve",
+   "Dashboard, API and scheduler"
+  ],
+  [
+   "snapshot",
+   "Snapshot now"
+  ],
+  [
+   "restore [--id N] [--to FOLDER]",
+   "Restore a snapshot"
+  ],
+  [
+   "verify",
+   "Check Merkle roots and every chunk, repair from mirrors"
+  ],
+  [
+   "gc --keep N",
+   "Expire old snapshots and delete unreferenced chunks"
+  ],
+  [
+   "list",
+   "List snapshots"
+  ],
+  [
+   "monitor",
+   "One monitoring sample"
+  ],
+  [
+   "attack / stealth",
+   "SAFE ransomware simulations"
+  ],
+  [
+   "outage / portal",
+   "Stop or start the demo portal"
+  ],
+  [
+   "reset",
+   "Delete demo data"
+  ]
+ ],
+ "files": "`engine.py` chunking, encryption, Merkle trees, detector, monitoring. `server.py` API, page and scheduler. `demo.py` demo data and simulations. `main.py` commands. `selftest.py` tests. `config.json` policy."
+}
