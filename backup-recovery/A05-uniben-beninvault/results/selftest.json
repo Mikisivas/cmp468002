@@ -1,0 +1,123 @@
+{
+ "dataset_files": 15,
+ "dataset_bytes": 131801,
+ "backup": {
+  "state": "ok",
+  "id": "20261004153324306559",
+  "files": 15,
+  "plain_bytes": 131801,
+  "cipher_bytes": 26689,
+  "shard_bytes": 13345,
+  "seconds": 0.101
+ },
+ "storage_overhead_percent": 50.0,
+ "recovery": {
+  "files_encrypted": 15,
+  "files_restored": 15,
+  "rto_seconds": 0.004,
+  "byte_identical": true
+ },
+ "sla_example": [
+  {
+   "service": "UNIBEN student portal",
+   "uptime": 75.0,
+   "target": 99.5,
+   "met": false
+  },
+  {
+   "service": "Portal TCP listener",
+   "uptime": 75.0,
+   "target": 99.0,
+   "met": false
+  }
+ ],
+ "tests": [
+  {
+   "test": "Backup split into 3 shards, each about half the archive",
+   "passed": true,
+   "detail": "26689 B archive -> 3 x 13345 B"
+  },
+  {
+   "test": "Restore works with site A lost",
+   "passed": true,
+   "detail": "['B', 'P']"
+  },
+  {
+   "test": "Restore works with site B lost",
+   "passed": true,
+   "detail": "['A', 'P']"
+  },
+  {
+   "test": "Restore works with site P lost",
+   "passed": true,
+   "detail": "['A', 'B']"
+  },
+  {
+   "test": "Losing two sites is reported, not silently wrong",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Scrub sees 1 healthy shard + 1 damaged + 1 missing as unrecoverable",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Scrub rebuilds a missing parity shard",
+   "passed": true,
+   "detail": "{'healthy': 0, 'rebuilt': ['20261004153324436253.P'], 'unrecoverable': []}"
+  },
+  {
+   "test": "All three shards healthy after scrub",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Quiet attack refused (text files unreadable)",
+   "passed": true,
+   "detail": "['6 text files are no longer readable text']"
+  },
+  {
+   "test": "Restore after quiet attack is byte-identical",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Loud attack refused (rename burst + ransom note)",
+   "passed": true,
+   "detail": "['rename burst: 15 files got a new extension (e.g. staff/payroll.csv)', 'ransom note found']"
+  },
+  {
+   "test": "Recovery after loud attack is byte-identical",
+   "passed": true,
+   "detail": "RTO 0.004 s"
+  },
+  {
+   "test": "SLA computed: 3 of 4 checks up = 75%, below 99.5% target",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Edited trail entry detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Auditor cannot trigger restore",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Admin POST without CSRF token refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Pages render",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 17,
+ "total": 17
+}

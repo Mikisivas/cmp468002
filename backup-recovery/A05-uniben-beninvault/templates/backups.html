@@ -1,0 +1,4 @@
+{% extends "layout.html" %}{% block main %}<div class="p"><table><tr><th>ID</th><th>Created</th><th>Files</th><th>Plain</th><th>Encrypted</th><th>Healthy shards</th><th>State</th><th></th></tr>
+{% for b in rows %}<tr><td>{{ b.id }}</td><td>{{ b.created }}</td><td>{{ b.files }}</td><td>{{ (b.plain_bytes or 0)//1024 }} KiB</td><td>{{ (b.cipher_bytes or 0)//1024 }} KiB</td>
+<td>{{ health.get(b.id, '-') }}</td><td class="{{ 'good' if b.state=='ok' else 'bad' }}">{{ b.state }} {{ b.reason }}</td>
+<td>{% if b.state=='ok' and session.role=='admin' %}<form method="post" action="/act"><input type="hidden" name="csrf" value="{{ session.csrf }}"><input type="hidden" name="id" value="{{ b.id }}"><button name="do" value="restore">Restore</button></form>{% endif %}</td></tr>{% endfor %}</table></div>{% endblock %}

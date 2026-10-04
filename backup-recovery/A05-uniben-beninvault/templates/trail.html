@@ -1,0 +1,2 @@
+{% extends "layout.html" %}{% block main %}<p class="{{ 'good' if ok else 'bad' }}">Trail {{ 'INTACT' if ok else 'TAMPERED' }}</p><div class="p"><table>
+{% for t in rows %}<tr><td>{{ t.ts }}</td><td>{{ t.who }}</td><td>{{ t.act }}</td></tr>{% endfor %}</table></div>{% endblock %}

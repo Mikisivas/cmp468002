@@ -1,0 +1,25 @@
+{
+  "institution": {
+    "name": "University of Maiduguri (Borno State)",
+    "short": "UNIMAID",
+    "matric_format": "{year}/05/{n}",
+    "departments": ["Computer Science", "Arabic Studies", "Animal Science", "Nursing", "Geology", "Agricultural Engineering", "Education"],
+    "states": ["Borno", "Yobe", "Adamawa", "Bauchi", "Gombe", "Kano", "Jigawa", "Taraba"],
+    "courses": ["CSC468", "CSC406", "CSC416", "CSC428"]
+  },
+  "source": "sample_data",
+  "local_store": "data/local_store",
+  "offsite_store": "data/offsite_abuja_mirror",
+  "port": 5106,
+  "portal_port": 8106,
+  "tick_seconds": 20,
+  "snapshot_minutes": 30,
+  "sync_minutes": 60,
+  "offsite_window": "00:00-05:30",
+  "daily_budget_mb": 200,
+  "max_delta_chain": 8,
+  "blocked_extensions": [".locked", ".encrypted", ".crypt", ".lockbit", ".zzz"],
+  "burst": {"window_seconds": 60, "max_files": 5, "min_share": 0.3},
+  "power": {"defer_percent": 40, "critical_percent": 15},
+  "services": {"UNIMAID student portal": "http://127.0.0.1:8106/health", "Portal TCP": "127.0.0.1:8106"}
+}

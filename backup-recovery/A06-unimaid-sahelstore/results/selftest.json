@@ -1,0 +1,119 @@
+{
+ "dataset_files": 15,
+ "dataset_bytes": 133395,
+ "first_snapshot": {
+  "ok": true,
+  "id": 1,
+  "files": 15,
+  "new_objects": 15,
+  "bytes_in": 133395,
+  "bytes_stored": 21756,
+  "secs": 0.112
+ },
+ "delta_sync": {
+  "files": 1,
+  "sent_bytes": 756,
+  "file_bytes": 37998
+ },
+ "recovery": {
+  "files_encrypted": 15,
+  "files_restored": 15,
+  "rto_seconds": 0.009,
+  "offsite_rto_seconds": 0.016,
+  "byte_identical": true
+ },
+ "tests": [
+  {
+   "test": "Initial snapshot (LZMA + AES-GCM)",
+   "passed": true,
+   "detail": "133395 B -> 21756 B"
+  },
+  {
+   "test": "Delta algorithm rebuilds the new file exactly",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Delta sends only the blocks around the two edits",
+   "passed": true,
+   "detail": "6018 literal bytes of 49026"
+  },
+  {
+   "test": "Changed 40 KB register synced as a small delta",
+   "passed": true,
+   "detail": "756 B sent for 37998 B"
+  },
+  {
+   "test": "On battery at 35%: heavy jobs deferred",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "At 12% battery: one emergency snapshot",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Next tick on low battery stays idle (no second snapshot)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Off-peak window logic (01:00 in, 14:00 out)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Quiet attack refused (burst of modified files)",
+   "passed": true,
+   "detail": "['6 files modified within 60 s']"
+  },
+  {
+   "test": "Restore after quiet attack is byte-identical",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Loud attack refused (ransomware extension)",
+   "passed": true,
+   "detail": "['15 files carry a ransomware extension']"
+  },
+  {
+   "test": "Local recovery after loud attack is byte-identical",
+   "passed": true,
+   "detail": "RTO 0.009 s"
+  },
+  {
+   "test": "Local store destroyed: full recovery from offsite base + deltas",
+   "passed": true,
+   "detail": "0.016 s"
+  },
+  {
+   "test": "Tampered offsite object is rejected (GCM tag)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Portal outage detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Status page refuses a wrong password",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Status page accepts the right password",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Edited log entry detected",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 18,
+ "total": 18
+}

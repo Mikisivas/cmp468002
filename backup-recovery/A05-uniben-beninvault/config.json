@@ -1,0 +1,25 @@
+{
+  "institution": {
+    "name": "University of Benin, Benin City (Edo State)",
+    "short": "UNIBEN",
+    "matric_format": "PSC{year}{n}",
+    "departments": ["Computer Science", "Medical Laboratory Science", "Fisheries", "Theatre Arts", "Geology", "Production Engineering", "Optometry"],
+    "states": ["Edo", "Delta", "Ondo", "Kogi", "Rivers", "Bayelsa", "Anambra", "Lagos"],
+    "courses": ["CSC468", "CSC411", "CSC421", "CSC435"]
+  },
+  "source": "sample_data",
+  "passphrase_env": "BENINVAULT_PASSPHRASE",
+  "sites": {"A": "data/site_ugbowo_ict_centre", "B": "data/site_ekehuan_campus", "P": "data/site_cloud_bucket_mount"},
+  "site_names": {"A": "Ugbowo ICT Centre server room", "B": "Ekehuan campus library", "P": "Cloud bucket (mounted, Object Lock)"},
+  "port": 5105,
+  "portal_port": 8105,
+  "check_seconds": 15,
+  "backup_minutes": 30,
+  "scrub_hours": 6,
+  "rename_burst": 3,
+  "garbled_limit": 3,
+  "services": [
+    {"name": "UNIBEN student portal", "kind": "http", "target": "http://127.0.0.1:8105/health", "sla": 99.5},
+    {"name": "Portal TCP listener", "kind": "tcp", "target": "127.0.0.1:8105", "sla": 99.0}
+  ]
+}

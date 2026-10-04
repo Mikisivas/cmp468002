@@ -1,0 +1,16 @@
+{% extends "layout.html" %}{% block main %}
+<div class="p"><h3>Storage sites (2 data shards + 1 parity)</h3><div class="sites">
+{% for s, info in sites.items() %}<div class="site"><b>Shard {{ s }}</b><br>{{ info.name }}<br>
+<span class="{{ 'good' if info.ok else 'bad' }}">{{ info.files }} shard files {{ '' if info.ok else '(MISSING SHARDS)' }}</span></div>{% endfor %}</div></div>
+<div class="p"><h3>Service uptime, last 24 h, against target</h3>
+<svg viewBox="0 0 600 {{ 40 * sla|length + 10 }}" style="width:100%;max-width:700px">
+{% for r in sla %}<text x="0" y="{{ 40*loop.index0 + 22 }}" font-size="13">{{ r.service }}</text>
+<rect x="230" y="{{ 40*loop.index0 + 8 }}" width="300" height="20" fill="#e0f2fe"/>
+<rect x="230" y="{{ 40*loop.index0 + 8 }}" width="{{ 3 * (r.uptime or 0) }}" height="20" fill="{{ '#16a34a' if r.met else '#dc2626' }}"/>
+<line x1="{{ 230 + 3*r.target }}" x2="{{ 230 + 3*r.target }}" y1="{{ 40*loop.index0 + 4 }}" y2="{{ 40*loop.index0 + 32 }}" stroke="#0c4a6e" stroke-width="2"/>
+<text x="540" y="{{ 40*loop.index0 + 22 }}" font-size="13">{{ r.uptime if r.uptime is not none else '-' }}%</text>{% endfor %}</svg>
+<small>Dark line = SLA target from config.json</small></div>
+{% if session.role == 'admin' %}<div class="p"><form method="post" action="/act" style="display:inline"><input type="hidden" name="csrf" value="{{ session.csrf }}">
+<button name="do" value="backup">Back up now</button> <button name="do" value="scrub">Scrub and rebuild shards</button></form></div>{% endif %}
+<div class="p"><h3>Notices</h3><table>{% for n in notices %}<tr><td>{{ n.ts }}</td><td class="{{ 'bad' if n.sev=='critical' else '' }}">{{ n.sev }}</td><td>{{ n.msg }}</td></tr>{% endfor %}</table></div>
+{% endblock %}
