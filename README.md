@@ -53,7 +53,7 @@ Every project uses its own port (5101 to 5110 and 5201 to 5210), so several can 
 
 `reports/` holds 20 Word reports (A01 to B10). Each has a title page, declaration, abstract, five chapters
 (introduction, literature review, methodology and design, implementation and testing, conclusion), references and
-appendices. Before submitting:
+appendices. `reports/study-qa/` holds a matching study question-and-answer document for each project (37 to 42 questions with model answers for the defence). Before submitting:
 
 1. Fill in the title page placeholders (university, name, matric number, lecturer).
 2. Right-click the table of contents and choose **Update Field**.

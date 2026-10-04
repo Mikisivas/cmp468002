@@ -7,3 +7,4 @@ Shared source used to build the projects.
 - `geo_b.py` is the original of each conflict project's `geo.py` (geography helpers and synthetic incident history).
 
 Each project folder carries its own copy, so it runs alone on its own computer.
+- `make_zips.py` rebuilds `zips/`: one ZIP per project with its report, study Q&A and the deployment guide.
