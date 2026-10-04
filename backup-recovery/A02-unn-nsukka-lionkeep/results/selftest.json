@@ -1,0 +1,120 @@
+{
+ "dataset_files": 15,
+ "dataset_bytes": 130564,
+ "full_backup": {
+  "status": "ok",
+  "kind": "full",
+  "archive": "20261004-152453-253191-full.lk",
+  "files": 15,
+  "raw_bytes": 130564,
+  "stored_bytes": 36492,
+  "seconds": 0.2,
+  "quarantined": 0
+ },
+ "differential_1": {
+  "status": "ok",
+  "kind": "diff",
+  "archive": "20261004-152453-642782-diff.lk",
+  "files": 1,
+  "raw_bytes": 36921,
+  "stored_bytes": 13860,
+  "seconds": 0.385,
+  "quarantined": 0
+ },
+ "differential_2": {
+  "status": "ok",
+  "kind": "diff",
+  "archive": "20261004-152454-052703-diff.lk",
+  "files": 2,
+  "raw_bytes": 40319,
+  "stored_bytes": 15524,
+  "seconds": 0.405,
+  "quarantined": 0
+ },
+ "recovery": {
+  "files_encrypted": 15,
+  "files_restored": 15,
+  "archives_used": 2,
+  "rto_seconds": 0.386,
+  "byte_identical": true
+ },
+ "tests": [
+  {
+   "test": "Full archive holds every file",
+   "passed": true,
+   "detail": "130564 B -> 36492 B in 0.2 s"
+  },
+  {
+   "test": "Differentials are cumulative since the last full",
+   "passed": true,
+   "detail": "diff1=1 diff2=2"
+  },
+  {
+   "test": "Single encrypted file is quarantined, rest still backed up",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Restore brings back the last clean copy of the quarantined file",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Quiet attack on 6 CSVs aborts the backup",
+   "passed": true,
+   "detail": "{'status': 'aborted', 'suspicious': 6}"
+  },
+  {
+   "test": "Restore after quiet attack is byte-identical",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Loud attack aborts the backup",
+   "passed": true,
+   "detail": "{'status': 'aborted', 'suspicious': 15}"
+  },
+  {
+   "test": "Full + differential restore after loud attack is byte-identical",
+   "passed": true,
+   "detail": "RTO 0.386 s, chain 2"
+  },
+  {
+   "test": "Damaged archive detected and repaired from NAS copy",
+   "passed": true,
+   "detail": "{'ok': 4, 'repaired': ['20261004-152453-253191-full.lk'], 'lost': []}"
+  },
+  {
+   "test": "GFS tiers (31 Oct = grandfather, Fri = father, Tue = son)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Edited activity log row is detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Portal outage detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Account locks after 5 wrong passwords",
+   "passed": true,
+   "detail": "[200, 200, 200, 200, 200]"
+  },
+  {
+   "test": "Viewer role cannot restore",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "POST without CSRF token is rejected",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 15,
+ "total": 15
+}

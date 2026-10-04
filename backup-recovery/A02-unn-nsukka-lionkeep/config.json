@@ -1,0 +1,29 @@
+{
+  "institution": {
+    "name": "University of Nigeria, Nsukka (Enugu State)",
+    "short": "UNN",
+    "matric_format": "{year}/{n}45",
+    "departments": ["Computer Science", "Statistics", "Pharmacy", "Linguistics", "Archaeology", "Electronic Engineering", "Accountancy"],
+    "states": ["Enugu", "Anambra", "Imo", "Ebonyi", "Abia", "Kogi", "Benue", "Delta"],
+    "courses": ["COS468", "COS412", "COS426", "COS444"]
+  },
+  "source": "sample_data",
+  "store": "data/archives",
+  "copies": ["data/copy_ict_centre_nas", "data/copy_enugu_campus"],
+  "passphrase_env": "LIONKEEP_PASSPHRASE",
+  "secret_env": "LIONKEEP_SECRET_KEY",
+  "port": 5102,
+  "portal_port": 8102,
+  "monitor_seconds": 20,
+  "diff_minutes": 30,
+  "full_every_hours": 24,
+  "entropy_limit": 7.2,
+  "abort_if_suspicious": 3,
+  "blocked_extensions": [".locked", ".encrypted", ".crypt", ".lockbit", ".akira", ".zzz"],
+  "gfs": {"son": 7, "father": 5, "grandfather": 12},
+  "thresholds": {"cpu": 90, "mem": 90, "disk": 92},
+  "services": [
+    {"name": "UNN student portal", "url": "http://127.0.0.1:8102/health"},
+    {"name": "Portal TCP port", "host": "127.0.0.1", "port": 8102}
+  ]
+}

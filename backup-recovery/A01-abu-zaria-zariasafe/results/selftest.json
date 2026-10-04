@@ -1,0 +1,107 @@
+{
+ "dataset_files": 15,
+ "dataset_bytes": 133145,
+ "full_backup": {
+  "status": "ok",
+  "version": "20261004-152146-115236",
+  "files": 15,
+  "changed": 15,
+  "seconds": 0.004,
+  "bytes_in": 133145,
+  "bytes_stored": 133565
+ },
+ "incremental_backup": {
+  "status": "ok",
+  "version": "20261004-152146-127171",
+  "files": 15,
+  "changed": 1,
+  "seconds": 0.002,
+  "bytes_in": 39502,
+  "bytes_stored": 39530
+ },
+ "unchanged_backup": {
+  "status": "ok",
+  "version": "20261004-152146-133425",
+  "files": 15,
+  "changed": 0,
+  "seconds": 0.002,
+  "bytes_in": 0,
+  "bytes_stored": 0
+ },
+ "recovery": {
+  "files_encrypted": 15,
+  "files_restored": 15,
+  "rto_seconds": 0.005,
+  "byte_identical": true
+ },
+ "verify_checked_objects": 16,
+ "tests": [
+  {
+   "test": "First (full) backup stores every file",
+   "passed": true,
+   "detail": "15 files in 0.004 s"
+  },
+  {
+   "test": "Incremental backup copies only the changed file",
+   "passed": true,
+   "detail": "changed=1"
+  },
+  {
+   "test": "Unchanged run stores nothing new",
+   "passed": true,
+   "detail": "0.002 s"
+  },
+  {
+   "test": "Quiet in-place encryption is held by the mass-change detector",
+   "passed": true,
+   "detail": "40% of protected files changed or vanished in one interval"
+  },
+  {
+   "test": "Restore after quiet attack is byte-identical",
+   "passed": true,
+   "detail": "6 files hit"
+  },
+  {
+   "test": "Loud attack (.locked + note) is held",
+   "passed": true,
+   "detail": "15 files with ransomware extensions (e.g. bursary/fees_2025_2026.csv.locked); 100% of protected files changed or vanished in one interval"
+  },
+  {
+   "test": "Full recovery after loud attack is byte-identical and note removed",
+   "passed": true,
+   "detail": "RTO 0.005 s"
+  },
+  {
+   "test": "Point-in-time restore of version 1 to a side folder",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Tampered object detected and repaired from replica",
+   "passed": true,
+   "detail": "['20261004-152146-115236:registry/students.csv']"
+  },
+  {
+   "test": "Edited manifest is rejected (HMAC signature)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Edited audit row breaks the signature chain",
+   "passed": true,
+   "detail": "broken at row 3"
+  },
+  {
+   "test": "Service outage detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Wrong password is refused",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 13,
+ "total": 13
+}

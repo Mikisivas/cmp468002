@@ -1,0 +1,26 @@
+{
+  "institution": {
+    "name": "Ahmadu Bello University, Zaria (Kaduna State)",
+    "short": "ABU",
+    "matric_format": "U{year}CS{n}",
+    "departments": ["Computer Science", "Mathematics", "Geography", "Agricultural Economics", "Veterinary Medicine", "Mass Communication", "Civil Engineering"],
+    "states": ["Kaduna", "Kano", "Katsina", "Zamfara", "Niger", "Plateau", "Bauchi", "Sokoto"],
+    "courses": ["COSC468", "COSC402", "COSC414", "COSC422"]
+  },
+  "source": "sample_data",
+  "vault": "data/vault",
+  "replicas": ["data/replica_second_disk", "data/replica_samaru_campus"],
+  "port": 5101,
+  "portal_port": 8101,
+  "monitor_seconds": 15,
+  "backup_minutes": 30,
+  "rpo_minutes": 60,
+  "keep_versions": 20,
+  "self_heal": true,
+  "thresholds": {"cpu": 90, "mem": 90, "disk": 92},
+  "detector": {"max_change_ratio": 0.3},
+  "services": [
+    {"name": "Student portal (HTTP)", "type": "http", "url": "http://127.0.0.1:8101/health"},
+    {"name": "Portal port (TCP)", "type": "tcp", "host": "127.0.0.1", "port": 8101}
+  ]
+}
