@@ -1,0 +1,117 @@
+{
+ "dataset_files": 15,
+ "dataset_bytes": 137439,
+ "backup": {
+  "status": "ok",
+  "id": 1,
+  "files": 15,
+  "bytes": 137439,
+  "seconds": 0.026,
+  "retain_until": "2026-11-03 15:40:34"
+ },
+ "recovery": {
+  "files_encrypted": 15,
+  "files_restored": 15,
+  "rto_seconds": 0.005,
+  "byte_identical": true,
+  "approvals": 2
+ },
+ "verify": {
+  "blobs_checked": 15,
+  "problems": []
+ },
+ "tests": [
+  {
+   "test": "Backup sealed into the WORM vault",
+   "passed": true,
+   "detail": "{'status': 'ok', 'id': 1, 'files': 15, 'bytes': 137439, 'seconds': 0.026, 'retain_until': '2026-11-03 15:40:34'}"
+  },
+  {
+   "test": "RFC 6238 test vector (SHA-1, T=59 s) gives 287082",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Admin sign-in fails without the authenticator code",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Admin sign-in works with password + current code",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Brute force locks the account even with the right password",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Deleting a locked backup is refused by the database trigger",
+   "passed": true,
+   "detail": "WORM: retention lock still active"
+  },
+  {
+   "test": "Editing a backup blob is refused (write-once)",
+   "passed": true,
+   "detail": "WORM: blobs are write-once"
+  },
+  {
+   "test": "Requester cannot approve their own request",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Auditor cannot approve",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Second admin approval releases the lock",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Released backup can now be deleted",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Quiet attack blocked (high-entropy CSV files)",
+   "passed": true,
+   "detail": "{'status': 'blocked', 'high_entropy': 6, 'bad_extension': 0}"
+  },
+  {
+   "test": "Loud attack blocked",
+   "passed": true,
+   "detail": "{'status': 'blocked', 'high_entropy': 15, 'bad_extension': 15}"
+  },
+  {
+   "test": "Approved restore after attack is byte-identical",
+   "passed": true,
+   "detail": "RTO 0.005 s"
+  },
+  {
+   "test": "Vault replicated to offline copy with SQLite backup API",
+   "passed": true,
+   "detail": "15 blobs"
+  },
+  {
+   "test": "Vault verification clean",
+   "passed": true,
+   "detail": "15"
+  },
+  {
+   "test": "Portal outage detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Auditor cannot seal or request",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 18,
+ "total": 18
+}

@@ -1,0 +1,23 @@
+{
+  "institution": {
+    "name": "Bayero University, Kano (Kano State)",
+    "short": "BUK",
+    "matric_format": "SCI/{year}/{n}",
+    "departments": ["Computer Science", "Software Engineering", "Hausa", "Islamic Studies", "Mechatronics Engineering", "Nursing Sciences", "Agricultural Economics"],
+    "states": ["Kano", "Jigawa", "Katsina", "Kaduna", "Bauchi", "Yobe", "Zamfara", "Sokoto"],
+    "courses": ["CSC4308", "CSC4301", "CSC4312", "CSC4320"]
+  },
+  "source": "sample_data",
+  "vault_db": "data/vault/kanoshield_vault.db",
+  "vault_copies": ["data/copy_new_campus/kanoshield_vault.db", "data/copy_offline_usb/kanoshield_vault.db"],
+  "port": 5108,
+  "portal_port": 8108,
+  "watch_seconds": 15,
+  "backup_minutes": 30,
+  "retention_days": 30,
+  "entropy_limit": 7.3,
+  "suspicious_limit": 3,
+  "max_failed_logins": 5,
+  "blocked_extensions": [".locked", ".encrypted", ".crypt", ".lockbit", ".zzz"],
+  "services": {"BUK student portal": "http://127.0.0.1:8108/health", "Portal TCP": "127.0.0.1:8108"}
+}

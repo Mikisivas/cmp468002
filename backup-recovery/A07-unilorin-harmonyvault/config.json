@@ -1,0 +1,21 @@
+{
+  "institution": {
+    "name": "University of Ilorin (Kwara State)",
+    "short": "UNILORIN",
+    "matric_format": "{year}/52HA{n}",
+    "departments": ["Computer Science", "Telecommunication Science", "Library and Information Science", "Veterinary Medicine", "Yoruba", "Water Resources Engineering", "Islamic Studies"],
+    "states": ["Kwara", "Kogi", "Oyo", "Niger", "Ekiti", "Osun", "Lagos", "Kebbi"],
+    "courses": ["CSC468", "CSC417", "CSC423", "CSC437"]
+  },
+  "source": "sample_data",
+  "repo": "data/repository",
+  "port": 5107,
+  "portal_port": 8107,
+  "probe_seconds": 15,
+  "commit_minutes": 30,
+  "anomaly_z": 3.0,
+  "anomaly_min_history": 3,
+  "fallback_share": 0.3,
+  "blocked_extensions": [".locked", ".encrypted", ".crypt", ".lockbit", ".zzz"],
+  "services": {"UNILORIN student portal": "http://127.0.0.1:8107/health"}
+}
