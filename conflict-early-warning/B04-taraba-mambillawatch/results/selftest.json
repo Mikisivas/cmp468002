@@ -1,0 +1,94 @@
+{
+ "ms_per_ping": 3.98,
+ "alerts_by_collar": {
+  "TRB-001": [
+   "APPROACH",
+   "BREACH"
+  ],
+  "TRB-002": [],
+  "TRB-003": [
+   "DEVIATION"
+  ],
+  "TRB-004": []
+ },
+ "lead_time_minutes": 30,
+ "tests": [
+  {
+   "test": "Point-in-polygon (ray casting) inside and outside",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Herd walking into an in-season farm: APPROACH with ETA, then BREACH",
+   "passed": true,
+   "detail": "ETA 22 min"
+  },
+  {
+   "test": "Warning came before the breach (lead time)",
+   "passed": true,
+   "detail": "30 minutes"
+  },
+  {
+   "test": "Breach alert reaches both the farmers' and the herders' leader",
+   "passed": true,
+   "detail": "farmers: Bali farmers' union chair, herders: Bali herders' Ardo"
+  },
+  {
+   "test": "Herd on the agreed corridor raises no farm alerts",
+   "passed": true,
+   "detail": "set()"
+  },
+  {
+   "test": "Herd leaving the corridor raises DEVIATION",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Low collar battery reported",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Teleporting (spoofed) collar is flagged and its position ignored",
+   "passed": true,
+   "detail": "['impossible speed']"
+  },
+  {
+   "test": "Replayed old ping (lower counter) refused",
+   "passed": true,
+   "detail": "replayed or out-of-order counter"
+  },
+  {
+   "test": "Ping with a forged signature refused",
+   "passed": true,
+   "detail": "bad signature"
+  },
+  {
+   "test": "Unknown collar refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Position outside Taraba refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Malformed ping returns 400",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Ranger cannot register collars",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Live state API works for staff",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 15,
+ "total": 15
+}

@@ -1,0 +1,20 @@
+{
+  "project": "MambillaWatch",
+  "state": "Taraba",
+  "lgas": [
+    ["Wukari", 7.871, 9.779, 0.70], ["Takum", 7.267, 9.983, 0.60], ["Ibi", 8.180, 9.750, 0.65], ["Donga", 7.720, 10.050, 0.55],
+    ["Bali", 7.850, 10.970, 0.55], ["Gassol", 8.650, 10.780, 0.60], ["Jalingo", 8.883, 11.367, 0.30], ["Lau", 9.210, 11.280, 0.50],
+    ["Karim Lamido", 9.310, 11.190, 0.50], ["Gashaka", 7.500, 11.360, 0.45], ["Sardauna", 6.710, 11.260, 0.65], ["Kurmi", 7.190, 10.680, 0.40]
+  ],
+  "routes": {"Gassol-Bali-Gashaka-Mambilla route (illustrative)": [[8.70, 10.75], [8.20, 10.85], [7.85, 10.95], [7.50, 11.30], [7.05, 11.25], [6.75, 11.25]],
+             "Ibi-Wukari-Takum route (illustrative)": [[8.20, 9.75], [7.90, 9.80], [7.55, 9.90], [7.25, 9.98]]},
+  "corridor_km": 3,
+  "reserves": [["Mambilla grazing reserve (illustrative)", 6.85, 11.30, 6], ["Bali grazing reserve (illustrative)", 7.95, 11.05, 5]],
+  "restricted": [["Gashaka-Gumti National Park core (illustrative)", 7.35, 11.55, 10]],
+  "water": [["Benue River at Ibi", 8.18, 9.75], ["Taraba River at Bali", 7.85, 10.95]],
+  "crop_calendar": {"yam": [3, 10], "maize": [5, 9], "rice": [6, 11], "cassava": [1, 12], "sorghum": [6, 11], "soybean": [6, 10], "millet": [5, 9]},
+  "approach_km": 2.0,
+  "max_speed_kmh": 12,
+  "alert_cooldown_minutes": 60,
+  "port": 5204
+}
