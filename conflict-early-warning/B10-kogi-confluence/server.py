@@ -110,6 +110,7 @@ class H(http.server.BaseHTTPRequestHandler):
 
 def serve():
     socketserver.ThreadingTCPServer.allow_reuse_address = True
-    with socketserver.ThreadingTCPServer(("127.0.0.1", geo.cfg()["port"]), H) as srv:
-        print(f"ConfluenceEWS hub on http://127.0.0.1:{geo.cfg()['port']}  (tablets POST /sync)")
+    bind = geo.cfg().get("bind", "127.0.0.1")  # set "0.0.0.0" in config.json so tablets on other computers can sync
+    with socketserver.ThreadingTCPServer((bind, geo.cfg()["port"]), H) as srv:
+        print(f"ConfluenceEWS hub on http://{bind}:{geo.cfg()['port']}  (tablets POST /sync)")
         srv.serve_forever()

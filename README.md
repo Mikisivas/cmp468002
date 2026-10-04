@@ -40,6 +40,8 @@ its own Word report.
 
 ## How to use one project on one computer
 
+Full step-by-step instructions, including offline installs and the projects that span several computers (A04, B10), are in [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md).
+
 1. Copy one project folder (for example `backup-recovery/A05-uniben-beninvault`) to the computer.
 2. Install Python 3.10 or newer from https://www.python.org/downloads/ and tick **Add python.exe to PATH**.
 3. Double-click `1_SETUP.bat`, then `2_START.bat`. Use `3_DEMO_MENU.bat` for the defence and `4_SELFTEST.bat` to rerun the tests.
