@@ -1,0 +1,17 @@
+{
+  "project": "YolaShield",
+  "state": "Adamawa",
+  "lgas": [
+    ["Numan", 9.467, 12.033, 0.75], ["Demsa", 9.450, 12.150, 0.80], ["Lamurde", 9.600, 11.790, 0.70], ["Girei", 9.360, 12.550, 0.55],
+    ["Fufore", 9.220, 12.650, 0.50], ["Mayo-Belwa", 9.050, 12.050, 0.60], ["Ganye", 8.430, 12.050, 0.45], ["Song", 9.820, 12.620, 0.50],
+    ["Guyuk", 9.890, 11.940, 0.65], ["Shelleng", 9.780, 12.080, 0.55], ["Yola South", 9.200, 12.480, 0.35], ["Jada", 8.760, 12.150, 0.45]
+  ],
+  "routes": {"Benue valley route (illustrative)": [[9.90, 12.70], [9.60, 12.40], [9.45, 12.10], [9.40, 11.80]]},
+  "water": [["Benue River at Numan", 9.47, 12.03]],
+  "ussd_code": "*347*22#",
+  "gateway_token_env": "YOLASHIELD_GATEWAY_TOKEN",
+  "gateway_allow": ["127.0.0.1"],
+  "block_size": 5,
+  "block_seconds": 600,
+  "port": 5206
+}

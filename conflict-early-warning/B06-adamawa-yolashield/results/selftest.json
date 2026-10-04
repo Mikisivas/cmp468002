@@ -1,0 +1,125 @@
+{
+ "hausa_report_flow": [
+  "CON YolaShield\n1. English\n2. Hausa\n3. Pidgin",
+  "CON YolaShield gargadin gaggawa\n1. Kai rahoton abin da ya faru\n2. Matakin hatsari a karamar hukumata\n3. Shawarwarin tsaro\n4. Nemi mai sulhu",
+  "CON Me ya faru?\n1. Shanu a gona\n2. An sace shanu\n3. Hari\n4. Barazana ko jita-jita\n5. An toshe hanya ko ruwa",
+  "CON Wace karamar hukuma?\n1. Numan\n2. Demsa\n3. Lamurde\n4. Girei\n5. Fufore\n0. Kari",
+  "CON Akwai wanda ke cikin hatsari yanzu?\n1. Eh\n2. A'a",
+  "CON Aika rahoto: Hari a Demsa (GAGGAWA)?\n1. Aika\n2. Soke",
+  "END An karbi rahoto YS00001. Na gode. Idan rai na cikin hatsari kira 112."
+ ],
+ "ledger": {
+  "blocks": 2,
+  "records": 8,
+  "ok": true,
+  "problems": []
+ },
+ "lamurde_risk": {
+  "score": 37.3,
+  "level": "Severe"
+ },
+ "tests": [
+  {
+   "test": "Hausa caller reports an attack in Lamurde (6 key presses)",
+   "passed": true,
+   "detail": "END An karbi rahoto YS00001. Na gode. Idan rai na cikin hatsari kira 112."
+  },
+  {
+   "test": "Every screen fits a basic phone (182 characters or fewer)",
+   "passed": true,
+   "detail": "139"
+  },
+  {
+   "test": "Telco retry of the same session does not create a duplicate",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "LGA list pages with 0 = more (English, Song on page 2)",
+   "passed": true,
+   "detail": "CON Send report: Cattle in farm in Song?\n1. Send\n2. Cancel"
+  },
+  {
+   "test": "Second-page LGA stored correctly",
+   "passed": true,
+   "detail": "Song"
+  },
+  {
+   "test": "Pidgin caller can cancel at the confirm step",
+   "passed": true,
+   "detail": "END E don cancel. We no send anything."
+  },
+  {
+   "test": "Invalid key press ends politely",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Caller can hear their LGA's alert level",
+   "passed": true,
+   "detail": "END Lamurde: alert level Low. Normal activity."
+  },
+  {
+   "test": "Mediation request accepted",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Reports sealed into signed blocks and the ledger verifies",
+   "passed": true,
+   "detail": "{'blocks': 2, 'records': 8, 'ok': True, 'problems': []}"
+  },
+  {
+   "test": "Urgent attack reports raise Lamurde to High or Severe",
+   "passed": true,
+   "detail": "{'score': 37.3, 'level': 'Severe'}"
+  },
+  {
+   "test": "Edited report detected (does not match its sealed fingerprint)",
+   "passed": true,
+   "detail": "['record YS00001: content changed after sealing']"
+  },
+  {
+   "test": "Deleted report detected",
+   "passed": true,
+   "detail": "['1 sealed report(s) deleted from the database']"
+  },
+  {
+   "test": "Ledger verifies again after the row is put back",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Rewritten block (without the signing key) fails signature and witness checks",
+   "passed": true,
+   "detail": "['block 1: hash differs from witness copy', 'block 1: bad signature', 'record YS00008: fingerprint not in ledger']"
+  },
+  {
+   "test": "Lawful erasure removes personal data but the ledger still verifies",
+   "passed": true,
+   "detail": "{'erased': 'YS00003', 'reason': 'test'}"
+  },
+  {
+   "test": "Caller phone numbers not stored in plain text",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Gateway call with the wrong token refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Gateway call with the right token gets the language menu",
+   "passed": true,
+   "detail": "CON YolaShield\n1. English\n2. Hausa\n3. Pidgin"
+  },
+  {
+   "test": "Phone simulator needs a staff session",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 20,
+ "total": 20
+}

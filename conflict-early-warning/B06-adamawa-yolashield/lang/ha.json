@@ -1,0 +1,7 @@
+{"name": "Hausa", "welcome": "YolaShield gargadin gaggawa", "menu": "1. Kai rahoton abin da ya faru\n2. Matakin hatsari a karamar hukumata\n3. Shawarwarin tsaro\n4. Nemi mai sulhu",
+ "type_q": "Me ya faru?", "lga_q": "Wace karamar hukuma?", "more": "0. Kari", "urgent_q": "Akwai wanda ke cikin hatsari yanzu?\n1. Eh\n2. A'a",
+ "confirm": "Aika rahoto: {type} a {lga}{urgent}?\n1. Aika\n2. Soke", "urgent_word": " (GAGGAWA)", "sent": "An karbi rahoto {ref}. Na gode. Idan rai na cikin hatsari kira 112.",
+ "cancel": "An soke. Ba a aika komai ba.", "level": "{lga}: matakin hatsari {level}. {advice}", "tips": "Ku guji taron jama'a. Kada ku yada jita-jita. Ku kai rahoton barazana da wuri. Kira 112.",
+ "mediator": "An aika bukata {ref}. Dan kwamitin zaman lafiya zai kira ka.", "bad": "Zabin bai dace ba.",
+ "types": ["Shanu a gona", "An sace shanu", "Hari", "Barazana ko jita-jita", "An toshe hanya ko ruwa"],
+ "advice": {"Low": "Al'amura kamar yadda aka saba.", "Moderate": "Ku yi hankali a hanya.", "High": "Ku guji gonaki da dare. An sanar da jami'an tsaro.", "Severe": "Ku koma wuri mai tsaro. An tura jami'an tsaro."}}

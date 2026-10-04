@@ -1,0 +1,7 @@
+{"name": "Pidgin", "welcome": "YolaShield early warning", "menu": "1. Report wetin happen\n2. Danger level for my LGA\n3. Safety advice\n4. Ask for peace person",
+ "type_q": "Wetin happen?", "lga_q": "Which LGA?", "more": "0. More", "urgent_q": "Anybody dey for danger now?\n1. Yes\n2. No",
+ "confirm": "Send report: {type} for {lga}{urgent}?\n1. Send\n2. Cancel", "urgent_word": " (URGENT)", "sent": "We don receive report {ref}. Thank you. If life dey for danger call 112.",
+ "cancel": "E don cancel. We no send anything.", "level": "{lga}: danger level {level}. {advice}", "tips": "No stay where crowd dey. No spread rumour. Report threat early. Call 112.",
+ "mediator": "Request {ref} don go. Peace committee person go call you.", "bad": "Wrong choice.",
+ "types": ["Cow enter farm", "Dem steal cow", "Attack", "Threat or rumour", "Dem block road or water"],
+ "advice": {"Low": "Everything normal.", "Moderate": "Take care when you dey travel.", "High": "No go farm for night. Security don hear.", "Severe": "Go safe place now. Security don move."}}

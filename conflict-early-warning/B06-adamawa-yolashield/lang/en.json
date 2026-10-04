@@ -1,0 +1,7 @@
+{"name": "English", "welcome": "YolaShield early warning", "menu": "1. Report an incident\n2. Alert level in my LGA\n3. Safety advice\n4. Ask for a mediator",
+ "type_q": "What happened?", "lga_q": "Which LGA?", "more": "0. More", "urgent_q": "Is anyone in danger now?\n1. Yes\n2. No",
+ "confirm": "Send report: {type} in {lga}{urgent}?\n1. Send\n2. Cancel", "urgent_word": " (URGENT)", "sent": "Report {ref} received. Thank you. If life is in danger call 112.",
+ "cancel": "Cancelled. Nothing was sent.", "level": "{lga}: alert level {level}. {advice}", "tips": "Stay away from crowds. Do not share rumours. Report threats early. Call 112.",
+ "mediator": "Request {ref} sent. A peace committee member will call you.", "bad": "Invalid choice.",
+ "types": ["Cattle in farm", "Cattle stolen", "Attack", "Threat or rumour", "Route or water blocked"],
+ "advice": {"Low": "Normal activity.", "Moderate": "Be careful when travelling.", "High": "Avoid farms at night. Security alerted.", "Severe": "Move to a safe place. Security deployed."}}
