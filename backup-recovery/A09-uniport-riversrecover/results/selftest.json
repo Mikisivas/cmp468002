@@ -1,0 +1,103 @@
+{
+ "dataset": {
+  "students": 400,
+  "results": 787,
+  "db_bytes": 315392
+ },
+ "base_snapshot": {
+  "base": "base_000001187_1791128669.enc",
+  "upto_seq": 1187,
+  "bytes": 315420
+ },
+ "recovery": {
+  "encrypted_bytes": 315392,
+  "replayed_rows": 13,
+  "rto_seconds": 0.042,
+  "rpo": "last shipped journal row (ship interval 5 s)",
+  "exact_match": true
+ },
+ "verify": {
+  "segments": 5,
+  "bases": 1,
+  "problems": []
+ },
+ "tests": [
+  {
+   "test": "Base snapshot taken with the online backup API",
+   "passed": true,
+   "detail": "{'base': 'base_000001187_1791128669.enc', 'upto_seq': 1187, 'bytes': 315420}"
+  },
+  {
+   "test": "Normal edits are journalled and shipped",
+   "passed": true,
+   "detail": "{'rows': 6, 'segment': 'seg_000001188_000001193.enc'}"
+  },
+  {
+   "test": "Editing a Senate-approved result is refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Amendment window allows a logged edit",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Grade-tamper burst freezes the database",
+   "passed": true,
+   "detail": "33 results updated to grade A in one burst"
+  },
+  {
+   "test": "Approved results were never changed by the insider",
+   "passed": true,
+   "detail": "{'changed': 33, 'blocked': 27}"
+  },
+  {
+   "test": "Frozen database refuses a mass delete",
+   "passed": true,
+   "detail": "{'deleted': 'DATABASE FROZEN by RiversRecover: suspected attack'}"
+  },
+  {
+   "test": "Point-in-time recovery to the moment before the tamper is exact",
+   "passed": true,
+   "detail": "{'target_time': '2026-10-04 15:44:33.102125', 'base': 1, 'replayed_rows': 7, 'seconds': 0.065}"
+  },
+  {
+   "test": "Recovered database is writable and triggers are back",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Ransomware made the live database unreadable",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Recovery after ransomware loses no shipped change (RPO = ship interval)",
+   "passed": true,
+   "detail": "RTO 0.042 s"
+  },
+  {
+   "test": "Recovery store chain verifies",
+   "passed": true,
+   "detail": "{'segments': 5, 'bases': 1, 'problems': []}"
+  },
+  {
+   "test": "Tampered journal segment detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Auditor cannot run recovery",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Auditor can view the journal",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 15,
+ "total": 15
+}

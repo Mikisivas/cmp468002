@@ -1,0 +1,119 @@
+{
+ "dataset_files": 15,
+ "dataset_bytes": 136249,
+ "backup": {
+  "status": "ok",
+  "id": 1,
+  "files": 15,
+  "plain_bytes": 136249,
+  "stored_bytes": 26904,
+  "seconds": 0.01,
+  "key_version": 1
+ },
+ "recovery": {
+  "files_encrypted": 15,
+  "files_restored": 15,
+  "rto_seconds": 0.007,
+  "byte_identical": true,
+  "custodians_needed": 2
+ },
+ "rotation": {
+  "new_version": 2,
+  "rewrapped": 2
+ },
+ "ceremonies": 9,
+ "tests": [
+  {
+   "test": "Unattended backup sealed with only the public key",
+   "passed": true,
+   "detail": "{'status': 'ok', 'id': 1, 'files': 15, 'plain_bytes': 136249, 'stored_bytes': 26904, 'seconds': 0.01, 'key_version': 1}"
+  },
+  {
+   "test": "Shamir: every pair of shares rebuilds the secret",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Shamir: a share paired with a forged one does not give the secret",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Restore works with any two of the three custodians",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "One custodian alone cannot restore",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Same share typed twice is refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "A mistyped share is caught by its checksum",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Quiet attack stops the backup (high entropy)",
+   "passed": true,
+   "detail": "{'status': 'stopped', 'bad_ext': 0, 'high_entropy': 6}"
+  },
+  {
+   "test": "Loud attack stops the backup",
+   "passed": true,
+   "detail": "{'status': 'stopped', 'bad_ext': 15, 'high_entropy': 0}"
+  },
+  {
+   "test": "Recovery after attack (2 custodians) is byte-identical",
+   "passed": true,
+   "detail": "RTO 0.007 s"
+  },
+  {
+   "test": "Key rotation re-wraps every data key",
+   "passed": true,
+   "detail": "2"
+  },
+  {
+   "test": "Old shares no longer open backups after rotation",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "New shares open old backups (archives untouched)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Crypto-shredded backup can never be restored",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Other backups still restore after shredding one",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Damaged primary archive: restore falls back to an intact copy",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Portal outage detected",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Auditor cannot run a restore",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 18,
+ "total": 18
+}

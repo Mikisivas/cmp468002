@@ -1,0 +1,21 @@
+{
+  "institution": {
+    "name": "Federal University of Technology, Akure (Ondo State)",
+    "short": "FUTA",
+    "matric_format": "CSC/{year}/{n}",
+    "departments": ["Computer Science", "Cyber Security", "Information Technology", "Mining Engineering", "Remote Sensing", "Industrial Design", "Food Science"],
+    "states": ["Ondo", "Ekiti", "Osun", "Oyo", "Edo", "Kogi", "Ogun", "Lagos"],
+    "courses": ["CSC468", "CYS402", "CSC413", "IFT431"]
+  },
+  "source": "sample_data",
+  "store": "data/archives",
+  "copies": ["data/copy_obakekere_campus", "data/copy_offline_tape"],
+  "port": 5110,
+  "portal_port": 8110,
+  "watch_seconds": 15,
+  "backup_minutes": 30,
+  "entropy_limit": 7.2,
+  "suspicious_limit": 3,
+  "blocked_extensions": [".locked", ".encrypted", ".crypt", ".lockbit", ".zzz"],
+  "services": {"FUTA student portal": "http://127.0.0.1:8110/health", "Portal TCP": "127.0.0.1:8110"}
+}

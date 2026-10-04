@@ -1,0 +1,17 @@
+{
+  "institution": {
+    "name": "University of Port Harcourt (Rivers State)",
+    "short": "UNIPORT",
+    "matric_format": "U{year}/55{n}",
+    "departments": ["Computer Science", "Petroleum Engineering", "Marine Biology", "Pharmacology", "Sociology", "Geology", "Linguistics"],
+    "courses": ["CSC468", "CSC481", "CSC487", "CSC492"]
+  },
+  "live_db": "data/live/uniport_results.db",
+  "recovery_store": "data/recovery_store",
+  "store_copies": ["data/copy_choba_campus", "data/copy_offsite_abuloma"],
+  "port": 5109,
+  "ship_seconds": 5,
+  "base_minutes": 60,
+  "detector": {"window_seconds": 60, "max_changes": 40, "max_grade_a_updates": 10},
+  "services": {"Results database": "sqlite:live", "Results portal": "http://127.0.0.1:5109/health"}
+}
