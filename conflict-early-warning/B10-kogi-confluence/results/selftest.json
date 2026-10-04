@@ -1,0 +1,134 @@
+{
+ "setup_seconds": 0.5,
+ "model": {
+  "train_rows": 396,
+  "test_rows": 132,
+  "positive_rate_test": 0.341,
+  "auc_model": 0.63,
+  "auc_naive_last30": 0.511,
+  "brier_model": 0.2136,
+  "brier_climatology": 0.2247,
+  "weights": {
+   "violent_7d": 0.215,
+   "violent_30d": -0.203,
+   "severity_90d": 0.14,
+   "log_days_since": 0.016,
+   "season": 0.164,
+   "baseline": 0.481,
+   "route_close": 0.067
+  }
+ },
+ "retry_after_lost_reply": {
+  "code": 200,
+  "acked": [
+   "1acaac96-e58f-4361-8c33-c8a027905fca",
+   "d3bff4f3-6262-4ad9-97ba-99f9cebef1ef"
+  ],
+  "new": 0,
+  "updated": 0,
+  "duplicates": 2,
+  "pending": 0
+ },
+ "bassa_risk": {
+  "before": 0.538,
+  "after": 0.762
+ },
+ "setup": {
+  "history_incidents": 413,
+  "tablets": [
+   "KG-TAB-01",
+   "KG-TAB-02",
+   "KG-TAB-03",
+   "KG-TAB-04"
+  ]
+ },
+ "tests": [
+  {
+   "test": "AUC of a perfect ranking is 1 and of a reversed ranking is 0",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Model beats chance on the most recent 90 days (AUC > 0.6)",
+   "passed": true,
+   "detail": "0.63"
+  },
+  {
+   "test": "Model at least matches the naive last-30-days rule",
+   "passed": true,
+   "detail": "0.63 vs 0.511"
+  },
+  {
+   "test": "Probabilities are better calibrated than an always-average forecast (Brier)",
+   "passed": true,
+   "detail": "0.2136 vs 0.2247"
+  },
+  {
+   "test": "Tablet works with no network (reports queued locally)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Sync with no connection fails safely and keeps the queue",
+   "passed": true,
+   "detail": "{'offline': True, 'error': '<urlopen error [Errno 111] Connection refused>', 'pending': 2}"
+  },
+  {
+   "test": "Network drops after the hub stored the data (reply lost)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Retry is idempotent: 0 new, 2 recognised duplicates, queue cleared",
+   "passed": true,
+   "detail": "{'code': 200, 'acked': ['1acaac96-e58f-4361-8c33-c8a027905fca', 'd3bff4f3-6262-4ad9-97ba-99f9cebef1ef'], 'new': 0, 'updated': 0, 'duplicates': 2, 'pending': 0}"
+  },
+  {
+   "test": "Hub holds exactly 2 reports (no duplicates)",
+   "passed": true,
+   "detail": "2"
+  },
+  {
+   "test": "Offline edit with a higher version replaces the old copy",
+   "passed": true,
+   "detail": "{'severity': 5, 'version': 2}"
+  },
+  {
+   "test": "Older version arriving late does not overwrite newer data",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Captured request replayed later is refused (counter)",
+   "passed": true,
+   "detail": "{'error': 'counter already used (replay)'}"
+  },
+  {
+   "test": "Request signed with another tablet's key is refused",
+   "passed": true,
+   "detail": "{'error': 'bad signature'}"
+  },
+  {
+   "test": "Malformed body refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "New violent reports raise Bassa's 14-day probability",
+   "passed": true,
+   "detail": "0.538 -> 0.762"
+  },
+  {
+   "test": "Tablet received the risk table for offline use",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Staff pages need sign-in",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 17,
+ "total": 17
+}

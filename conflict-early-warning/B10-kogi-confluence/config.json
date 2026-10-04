@@ -1,0 +1,17 @@
+{
+  "project": "ConfluenceEWS",
+  "state": "Kogi",
+  "lgas": [
+    ["Lokoja", 7.800, 6.740, 0.45], ["Kotonkarfe", 8.100, 6.800, 0.60], ["Ajaokuta", 7.560, 6.660, 0.45], ["Dekina", 7.690, 7.030, 0.75],
+    ["Omala", 7.850, 7.530, 0.80], ["Bassa", 7.950, 7.100, 0.75], ["Ankpa", 7.400, 7.630, 0.55], ["Ofu", 7.380, 7.030, 0.60],
+    ["Ibaji", 6.950, 6.780, 0.70], ["Idah", 7.110, 6.730, 0.40], ["Kabba", 7.830, 6.070, 0.35], ["Olamaboro", 7.180, 7.600, 0.50]
+  ],
+  "routes": {"Benue-Omala-Bassa route (illustrative)": [[7.90, 7.80], [7.85, 7.50], [7.90, 7.15], [7.80, 6.85]]},
+  "water": [["Niger-Benue confluence", 7.80, 6.75], ["Anambra River at Ibaji", 6.95, 6.80]],
+  "horizon_days": 14,
+  "train_until_days_ago": 90,
+  "l2": 0.01,
+  "learning_rate": 0.5,
+  "epochs": 600,
+  "port": 5210
+}
