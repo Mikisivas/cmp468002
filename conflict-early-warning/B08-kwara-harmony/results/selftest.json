@@ -1,0 +1,149 @@
+{
+ "history": {
+  "cases": 60,
+  "by_state": {
+   "assigned": 5,
+   "closed": 5,
+   "mediation": 9,
+   "monitoring": 25,
+   "reported": 12,
+   "verified": 4
+  },
+  "median_days_to_close": 54.0,
+  "sla_breaches": 21
+ },
+ "baruten_risk": {
+  "open": 8,
+  "recent_30d": 3,
+  "relapses_90d": 4,
+  "score": 85,
+  "level": "Severe"
+ },
+ "sla_breaches_in_3_days": 22,
+ "export": {
+  "grid_km": 5,
+  "k": 3,
+  "suppressed_cases": 62,
+  "generated": "2026-10-04T16:10:04"
+ },
+ "denied_attempts_logged": 6,
+ "tests": [
+  {
+   "test": "Synthetic case history loaded across the workflow",
+   "passed": true,
+   "detail": "{'assigned': 5, 'closed': 5, 'mediation': 9, 'monitoring': 25, 'reported': 12, 'verified': 4}"
+  },
+  {
+   "test": "Officer cannot open a case outside their LGAs",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Workflow refuses skipping steps (reported -> mediation)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Only a supervisor can assign a mediator",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Another mediator cannot act on the case",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Agreement needs terms and compensation",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Case cannot close before 30 days of monitoring",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Assigned mediator reads the encrypted notes",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Unassigned mediator cannot read notes",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Auditor cannot read notes",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Notes are not stored in plain text",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Officer sees only their own LGAs",
+   "passed": true,
+   "detail": "{'Ekiti', 'Isin', 'Ilorin East', 'Oyun', 'Ilorin South', 'Asa'}"
+  },
+  {
+   "test": "Mediator sees only assigned cases",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "New incident during monitoring reopens mediation and alerts (relapse)",
+   "passed": true,
+   "detail": "RELAPSE in Baruten: new incident (case 62) while agreement of case 61 was being monitored. Mediation reopened; call both parties within 24 hours."
+  },
+  {
+   "test": "Relapse raises Baruten's risk score",
+   "passed": true,
+   "detail": "{'open': 8, 'recent_30d': 3, 'relapses_90d': 4, 'score': 85, 'level': 'Severe'}"
+  },
+  {
+   "test": "SLA monitor flags the new unverified case after 24 h",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Public export: every published cell has at least k=3 cases",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Public export accounts for every case (published + suppressed)",
+   "passed": true,
+   "detail": "62"
+  },
+  {
+   "test": "Exported points are grid centres, not real locations",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Every refused action is logged",
+   "passed": true,
+   "detail": "6"
+  },
+  {
+   "test": "Officer cannot open a case page in another LGA",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Officer cannot download the public export",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "The internal 'system' account cannot sign in",
+   "passed": true,
+   "detail": ""
+  }
+ ],
+ "passed": 23,
+ "total": 23
+}

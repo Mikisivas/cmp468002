@@ -1,0 +1,16 @@
+{
+  "project": "KwaraHarmony",
+  "state": "Kwara",
+  "lgas": [
+    ["Baruten", 9.550, 3.210, 0.75], ["Kaiama", 9.600, 3.950, 0.70], ["Moro", 8.930, 4.780, 0.65], ["Edu", 8.850, 5.420, 0.60],
+    ["Patigi", 8.730, 5.750, 0.55], ["Asa", 8.400, 4.430, 0.50], ["Ifelodun", 8.820, 4.980, 0.55], ["Ekiti", 8.100, 5.200, 0.35],
+    ["Isin", 8.300, 5.000, 0.40], ["Ilorin South", 8.450, 4.550, 0.30], ["Oyun", 8.150, 4.700, 0.40], ["Ilorin East", 8.600, 4.730, 0.40]
+  ],
+  "routes": {"Baruten-Kaiama-Moro route (illustrative)": [[9.80, 3.30], [9.60, 3.90], [9.20, 4.40], [8.90, 4.80]]},
+  "water": [["Niger River at Patigi", 8.73, 5.75], ["Asa Dam", 8.43, 4.53]],
+  "sla_hours": {"verify": 24, "assign": 48, "first_meeting": 168},
+  "monitoring_days": 30,
+  "export_grid_km": 5,
+  "export_k": 3,
+  "port": 5208
+}
