@@ -73,7 +73,8 @@ def run():
     gj = cs.public_geojson()
     res["export"] = gj["metadata"]
     total = sum(f["properties"]["cases"] for f in gj["features"]) + gj["metadata"]["suppressed_cases"]
-    case("Public export: every published cell has at least k=3 cases", all(f["properties"]["cases"] >= 3 for f in gj["features"]))
+    case("Public export publishes data, and every published cell has at least k=3 cases",
+         gj["features"] and all(f["properties"]["cases"] >= 3 for f in gj["features"]), f"{len(gj['features'])} cells")
     case("Public export accounts for every case (published + suppressed)", total == cs.kpis()["cases"], total)
     case("Exported points are grid centres, not real locations", all(f["properties"].keys() == {"cases", "open", "types"} for f in gj["features"]))
     with cs.db() as con:

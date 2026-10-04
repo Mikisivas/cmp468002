@@ -14,7 +14,7 @@ Default login after setup: password ChangeMe@468 for supervisor, officer_north, 
 - **Per-case encryption** of field notes with AES-256-GCM, keys derived by HKDF from a master key and the case number.
 - **Relapse detection**: a new case in an LGA with an agreement under monitoring reopens mediation and alerts the supervisor.
 - **Service-level monitoring**: verify within 24 h, assign within 48 h, first meeting within 7 days.
-- **Privacy-preserving GeoJSON export**: locations snapped to a 5 km grid and cells with fewer than 3 cases suppressed (k-anonymity).
+- **Privacy-preserving GeoJSON export**: locations snapped to a 10 km grid and cells with fewer than 3 cases suppressed (k-anonymity).
 
 ## Part A. Install on a Windows computer (about 10 minutes)
 

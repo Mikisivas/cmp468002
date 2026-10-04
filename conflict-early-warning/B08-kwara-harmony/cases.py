@@ -239,16 +239,17 @@ def kpis():
 
 # ----------------------------------------------------------------- privacy-preserving export
 def public_geojson():
-    """Locations snapped to a 5 km grid; cells with fewer than k=3 cases are suppressed (k-anonymity)."""
+    """Locations snapped to a coarse grid (config export_grid_km); cells with fewer than k=3 cases are suppressed (k-anonymity)."""
     c = geo.cfg()
     step_lat = c["export_grid_km"] / 110.57
     cells = {}
     with db() as con:
         for r in con.execute("SELECT lat, lon, type, state FROM cases"):
-            step_lon = c["export_grid_km"] / (111.32 * math.cos(math.radians(r["lat"])))
-            key = (round(math.floor(r["lat"] / step_lat) * step_lat + step_lat / 2, 4),
-                   round(math.floor(r["lon"] / step_lon) * step_lon + step_lon / 2, 4))
-            cells.setdefault(key, []).append(r)
+            row = math.floor(r["lat"] / step_lat)
+            centre_lat = (row + 0.5) * step_lat  # one longitude step per grid row, so a cell has one key
+            step_lon = c["export_grid_km"] / (111.32 * math.cos(math.radians(centre_lat)))
+            col = math.floor(r["lon"] / step_lon)
+            cells.setdefault((round(centre_lat, 4), round((col + 0.5) * step_lon, 4)), []).append(r)
     feats, suppressed = [], 0
     for (la, lo), rows in cells.items():
         if len(rows) < c["export_k"]:

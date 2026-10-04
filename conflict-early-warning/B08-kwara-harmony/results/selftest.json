@@ -21,10 +21,10 @@
  },
  "sla_breaches_in_3_days": 22,
  "export": {
-  "grid_km": 5,
+  "grid_km": 10,
   "k": 3,
-  "suppressed_cases": 62,
-  "generated": "2026-10-04T16:10:04"
+  "suppressed_cases": 31,
+  "generated": "2026-10-04T16:20:40"
  },
  "denied_attempts_logged": 6,
  "tests": [
@@ -86,7 +86,7 @@
   {
    "test": "Officer sees only their own LGAs",
    "passed": true,
-   "detail": "{'Ekiti', 'Isin', 'Ilorin East', 'Oyun', 'Ilorin South', 'Asa'}"
+   "detail": "{'Isin', 'Ilorin South', 'Ekiti', 'Oyun', 'Asa', 'Ilorin East'}"
   },
   {
    "test": "Mediator sees only assigned cases",
@@ -109,9 +109,9 @@
    "detail": ""
   },
   {
-   "test": "Public export: every published cell has at least k=3 cases",
+   "test": "Public export publishes data, and every published cell has at least k=3 cases",
    "passed": true,
-   "detail": ""
+   "detail": "7 cells"
   },
   {
    "test": "Public export accounts for every case (published + suppressed)",

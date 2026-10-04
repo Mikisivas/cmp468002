@@ -10,7 +10,7 @@
   "water": [["Niger River at Patigi", 8.73, 5.75], ["Asa Dam", 8.43, 4.53]],
   "sla_hours": {"verify": 24, "assign": 48, "first_meeting": 168},
   "monitoring_days": 30,
-  "export_grid_km": 5,
+  "export_grid_km": 10,
   "export_k": 3,
   "port": 5208
 }
