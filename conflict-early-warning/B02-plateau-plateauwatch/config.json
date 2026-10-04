@@ -1,0 +1,18 @@
+{
+  "project": "PlateauWatch",
+  "state": "Plateau",
+  "lgas": [
+    ["Bokkos", 9.300, 9.000, 0.90], ["Barkin Ladi", 9.533, 8.900, 0.85], ["Mangu", 9.520, 9.100, 0.85],
+    ["Riyom", 9.630, 8.770, 0.75], ["Bassa", 9.930, 8.730, 0.70], ["Jos South", 9.800, 8.870, 0.45],
+    ["Jos North", 9.920, 8.890, 0.35], ["Wase", 9.100, 9.950, 0.70], ["Langtang North", 9.150, 9.790, 0.55],
+    ["Shendam", 8.880, 9.530, 0.40], ["Qua'an Pan", 8.800, 9.200, 0.45], ["Kanam", 9.370, 9.750, 0.50]
+  ],
+  "routes": {"Bassa-Riyom-Barkin Ladi-Bokkos corridor (illustrative)": [[10.05, 8.70], [9.75, 8.80], [9.50, 8.92], [9.25, 9.02], [8.95, 9.20]],
+             "Wase-Kanam corridor (illustrative)": [[9.60, 9.70], [9.30, 9.80], [9.05, 9.95]]},
+  "water": [["Shemankar River", 9.00, 9.40], ["Wase River", 9.10, 9.90]],
+  "cell_km": 3,
+  "bandwidth_km": "silverman",
+  "max_bandwidth_km": 10,
+  "hotspot_quantile": 0.90,
+  "port": 5202
+}

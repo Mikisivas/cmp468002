@@ -1,0 +1,120 @@
+{
+ "setup": {
+  "incidents": 191,
+  "analysis": {
+   "bandwidth_km": 10,
+   "incidents_now": 11,
+   "hotspots": [
+    [
+     "Mangu",
+     "persistent (intensifying)"
+    ],
+    [
+     "Riyom",
+     "persistent (cooling)"
+    ]
+   ],
+   "fading": [
+    "Wase",
+    "Bassa"
+   ]
+  }
+ },
+ "pai": {
+  "bandwidth_km": 10,
+  "cells": 2968,
+  "hot_cells": 193,
+  "area_share": 0.065,
+  "test_incidents": 11,
+  "captured": 3,
+  "hit_rate": 0.273,
+  "pai": 4.19
+ },
+ "analysis_seconds": 0.029,
+ "flare": {
+  "bandwidth_km": 10,
+  "incidents_now": 19,
+  "hotspots": [
+   [
+    "Kanam",
+    "emerging"
+   ],
+   [
+    "Mangu",
+    "persistent (intensifying)"
+   ],
+   [
+    "Riyom",
+    "persistent (cooling)"
+   ]
+  ],
+  "fading": [
+   "Wase",
+   "Bassa"
+  ]
+ },
+ "tests": [
+  {
+   "test": "Gaussian kernel integrates to about 1 (correct normalisation)",
+   "passed": true,
+   "detail": "0.984"
+  },
+  {
+   "test": "Silverman bandwidth computed from data",
+   "passed": true,
+   "detail": "10"
+  },
+  {
+   "test": "Predictive Accuracy Index above 1 (better than random)",
+   "passed": true,
+   "detail": "{'bandwidth_km': 10, 'cells': 2968, 'hot_cells': 193, 'area_share': 0.065, 'test_incidents': 11, 'captured': 3, 'hit_rate': 0.273, 'pai': 4.19}"
+  },
+  {
+   "test": "New wave in quiet Kanam appears as an EMERGING hotspot",
+   "passed": true,
+   "detail": "[('Kanam', 'emerging'), ('Mangu', 'persistent (intensifying)'), ('Riyom', 'persistent (cooling)')]"
+  },
+  {
+   "test": "Emerging hotspot raises one alert",
+   "passed": true,
+   "detail": "EMERGING HOTSPOT near Kanam (9.369, 9.7408): new or at least 3x denser than the previous 30 days. Send an assessment team."
+  },
+  {
+   "test": "No duplicate alert within 24 h",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "CSV import accepts good rows and rejects bad ones with reasons",
+   "passed": true,
+   "detail": "{'imported': 1, 'rejected': [\"line 3: 'atlantis'\", 'line 4: severity must be 1-5', 'line 5: location outside Plateau State', 'line 6: unknown type']}"
+  },
+  {
+   "test": "SQL injection attempt stored nothing harmful (table intact)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Offline SVG map renders without any external resource",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Observer sees no import form",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Import without valid CSRF token is refused",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "Login locks after 5 failures",
+   "passed": true,
+   "detail": "[401, 401, 401, 401, 401, 401]"
+  }
+ ],
+ "passed": 12,
+ "total": 12
+}
